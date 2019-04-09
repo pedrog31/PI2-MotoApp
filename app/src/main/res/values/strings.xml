@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MotoApp</string>
+    <string name="default_web_client_id" translatable="false">
+        275475136526-jvm4eagbab3qc4ahhpqvkc2m44mok5et.apps.googleusercontent.com
+    </string>
+
+    <string name="accion_cerrar_sesion">Cerrar sesion</string>
+    <string name="completar_registro">Completar registro</string>
+    <string name="celular">Celular</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="correo_electronico">Correo electronico</string>
+    <string name="nombre">Nombre</string>
+    <string name="tab_principal_rutas">Rutas</string>
+    <string name="tab_principal_inicio">Inicio</string>
+    <string name="tab_principal_amigos">Amigos</string>
+</resources>

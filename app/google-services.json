@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "275475136526",
+    "firebase_url": "https://pi2-motoapp.firebaseio.com",
+    "project_id": "pi2-motoapp",
+    "storage_bucket": "pi2-motoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275475136526:android:848532929ea4afda",
+        "android_client_info": {
+          "package_name": "co.edu.udea.motoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275475136526-aiqq9m845oo20glohq1qufg852ik82vu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.edu.udea.motoapp",
+            "certificate_hash": "6675a0e99c8c281063c59f369a8a880c7799b46c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWqjKv0gu4ufrZQ9a3TEVnH-6IQgpcX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275475136526-jvm4eagbab3qc4ahhpqvkc2m44mok5et.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
