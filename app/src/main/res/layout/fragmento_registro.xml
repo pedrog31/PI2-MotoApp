@@ -32,7 +32,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="textWebEmailAddress|textEmailAddress"
                 android:ems="10"
                 android:id="@+id/registro_correo" android:layout_weight="1" android:hint="@string/correo_electronico"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +60,7 @@
         <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/registro_ciudad" android:layout_weight="1"
-        />
+                android:inputType="textAutoCorrect|textCapWords"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
             android:id="@+id/completar_registro"

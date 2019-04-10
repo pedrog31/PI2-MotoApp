@@ -15,8 +15,8 @@
                 android:layout_height="match_parent">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" tools:src="@tools:sample/avatars" android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" tools:src="@tools:sample/avatars" android:id="@+id/imagen"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
@@ -26,7 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/texto_nombre"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imagen"
                     app:layout_constraintBottom_toTopOf="@+id/texto_correo"
                     app:layout_constraintEnd_toStartOf="@+id/valor_texto_nombre"
                     app:layout_constraintHorizontal_bias="0.0" android:layout_marginStart="8dp"/>
@@ -61,7 +61,7 @@
                     android:text="-"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/valor_texto_nombre"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imagen"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/valor_texto_correo"
             />

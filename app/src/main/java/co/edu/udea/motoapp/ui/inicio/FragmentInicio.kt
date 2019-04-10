@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.ui.perfil.FragmentoPerfil
 
 
 class FragmentInicio : Fragment() {
@@ -22,7 +21,7 @@ class FragmentInicio : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_inicio, container, false)
+        return inflater.inflate(R.layout.fragmento_inicio, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
