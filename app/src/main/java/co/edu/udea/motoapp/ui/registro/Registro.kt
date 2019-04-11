@@ -55,7 +55,10 @@ class Registro : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        modeloVistaRegistro = ViewModelProviders.of(this).get(ModeloVistaRegistro::class.java)
+        activity?.let {
+            modeloVistaRegistro = ViewModelProviders.of(this).get(ModeloVistaRegistro::class.java)
+            modeloVistaRegistro.estadoRegistro.observe(this@Registro, this.observadorEstadoRegistro)
+        }
         llenarFormularioRegistro()
         completar_registro.setOnClickListener {
             this.guardarInformacionMotero()
@@ -65,7 +68,6 @@ class Registro : Fragment() {
                 this.guardarInformacionMotero()
             true
         }
-        modeloVistaRegistro.estadoRegistro.observe(this@Registro, this.observadorEstadoRegistro)
     }
 
     private fun llenarFormularioRegistro() {

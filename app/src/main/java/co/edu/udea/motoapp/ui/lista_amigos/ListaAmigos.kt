@@ -10,14 +10,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import co.edu.udea.motoapp.R
+import co.edu.udea.motoapp.excepcion.ExcepcionAutenticacion
 import co.edu.udea.motoapp.modelo.Motero
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class ListaAmigos : Fragment() {
 
     private lateinit var modeloVistaAmigos: ModeloVistaAmigos
     private var adaptadorVistaAmigos: AdaptadorAmigo? = null
-    private val observadorEstadoRegistro = Observer<HashMap<String, Motero>> { estado ->
-        estado?.let {
+    private val observadorListaAmigos = Observer<HashMap<String, Motero>> { listaAmigos ->
+        listaAmigos?.let {
             adaptadorVistaAmigos?.notifyDataSetChanged()
         }
     }
@@ -26,11 +29,16 @@ class ListaAmigos : Fragment() {
         val view = inflater.inflate(R.layout.fragmento_amigo_lista, container, false)
         if (view is RecyclerView) {
             with(view) {
-                modeloVistaAmigos = ViewModelProviders.of(this@ListaAmigos).get(ModeloVistaAmigos::class.java)
-                if (modeloVistaAmigos.listaAmigos.value == null)
-                    modeloVistaAmigos.buscarAmigos()
-                modeloVistaAmigos.listaAmigos.observe(this@ListaAmigos, this@ListaAmigos.observadorEstadoRegistro)
-                layoutManager = LinearLayoutManager(context)
+                activity?.let {
+                    modeloVistaAmigos = ViewModelProviders.of(it).get(ModeloVistaAmigos::class.java)
+                    if (modeloVistaAmigos.listaAmigos.value == null) {
+                        val moteroId = FirebaseAuth.getInstance().uid ?: throw ExcepcionAutenticacion()
+                        val query = FirebaseDatabase.getInstance().reference.child("moteros/${moteroId}/amigos")
+                        modeloVistaAmigos.buscarAmigos(query)
+                    }
+                    modeloVistaAmigos.listaAmigos.observe(it, this@ListaAmigos.observadorListaAmigos)
+                }
+               layoutManager = LinearLayoutManager(context)
                 adaptadorVistaAmigos = modeloVistaAmigos.listaAmigos.value?.values?.let { AdaptadorAmigo(it, this@ListaAmigos.context!!) }
                 adapter = adaptadorVistaAmigos
             }

@@ -17,4 +17,5 @@
     <string name="tab_principal_rutas">Rutas</string>
     <string name="tab_principal_inicio">Inicio</string>
     <string name="tab_principal_amigos">Amigos</string>
+    <string name="buscar_amigos">Buscar amigos</string>
 </resources>

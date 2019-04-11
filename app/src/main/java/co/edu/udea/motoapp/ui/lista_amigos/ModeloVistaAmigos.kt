@@ -1,10 +1,8 @@
 package co.edu.udea.motoapp.ui.lista_amigos
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
-import co.edu.udea.motoapp.excepcion.ExcepcionAutenticacion
+import androidx.lifecycle.ViewModel
 import co.edu.udea.motoapp.modelo.Motero
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class ModeloVistaAmigos : ViewModel() {
@@ -47,9 +45,8 @@ class ModeloVistaAmigos : ViewModel() {
     }
 
 
-    fun buscarAmigos() {
+    fun buscarAmigos(query: Query) {
         listaAmigos.value = hashMapOf()
-        val moteroId = FirebaseAuth.getInstance().uid ?: throw ExcepcionAutenticacion()
-        repositorioMoteros.child("${moteroId}/amigos").addChildEventListener(escuchadorIdentificadorAmigos)
+        query.addChildEventListener(escuchadorIdentificadorAmigos)
     }
 }
