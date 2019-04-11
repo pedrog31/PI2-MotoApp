@@ -12,14 +12,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.actividad.ActividadAutenticacion
-import co.edu.udea.motoapp.actividad.ActividadPrincipal
+import co.edu.udea.motoapp.actividad.Autenticacion
+import co.edu.udea.motoapp.actividad.Principal
 import kotlinx.android.synthetic.main.fragmento_registro.*
 import com.firebase.ui.auth.AuthUI
 
 
 
-class FragmentoRegistro : Fragment() {
+class Registro : Fragment() {
 
     private lateinit var modeloVistaRegistro: ModeloVistaRegistro
 
@@ -34,16 +34,16 @@ class FragmentoRegistro : Fragment() {
 
     private fun manejarErrorRegistro(estado: String) {
         this.mostrarMensaje(estado)
-        Log.e(FragmentoRegistro::class.java.name, estado)
+        Log.e(Registro::class.java.name, estado)
         AuthUI.getInstance()
-            .signOut(this@FragmentoRegistro.requireContext())
+            .signOut(this@Registro.requireContext())
             .addOnCompleteListener {
-                startActivity(Intent(this@FragmentoRegistro.context, ActividadAutenticacion::class.java))
+                startActivity(Intent(this@Registro.context, Autenticacion::class.java))
             }
     }
 
     companion object {
-        fun newInstance() = FragmentoRegistro()
+        fun newInstance() = Registro()
     }
 
     override fun onCreateView(
@@ -65,7 +65,7 @@ class FragmentoRegistro : Fragment() {
                 this.guardarInformacionMotero()
             true
         }
-        modeloVistaRegistro.estadoRegistro.observe(this@FragmentoRegistro, this.observadorEstadoRegistro)
+        modeloVistaRegistro.estadoRegistro.observe(this@Registro, this.observadorEstadoRegistro)
     }
 
     private fun llenarFormularioRegistro() {
@@ -84,11 +84,12 @@ class FragmentoRegistro : Fragment() {
 
     private fun completarRegistroExitoso() {
         this.mostrarMensaje("Registro exitoso")
-        startActivity(Intent(this@FragmentoRegistro.context, ActividadPrincipal::class.java))
+        startActivity(Intent(this@Registro.context, Principal::class.java))
+        activity?.finish()
     }
 
     private fun mostrarMensaje(mensaje: String) {
-        Toast.makeText(this@FragmentoRegistro.context, mensaje, Toast.LENGTH_LONG).show()
+        Toast.makeText(this@Registro.context, mensaje, Toast.LENGTH_LONG).show()
     }
 
 }

@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.inicio.FragmentInicio">
+        tools:context=".ui.inicio.Inicio">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -14,7 +14,7 @@
                 android:id="@+id/contenedor_fragmento_perfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="co.edu.udea.motoapp.ui.perfil.FragmentoPerfil"
+                android:name="co.edu.udea.motoapp.ui.perfil.Perfil"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent"

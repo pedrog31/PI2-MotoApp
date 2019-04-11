@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.modelo.Motero
 
-class FragmentoListaAmigos : Fragment() {
+class ListaAmigos : Fragment() {
 
     private lateinit var modeloVistaAmigos: ModeloVistaAmigos
-    private var adaptadorVistaAmigos: AmigoRecyclerViewAdaptador? = null
+    private var adaptadorVistaAmigos: AdaptadorAmigo? = null
     private val observadorEstadoRegistro = Observer<HashMap<String, Motero>> { estado ->
         estado?.let {
             adaptadorVistaAmigos?.notifyDataSetChanged()
@@ -26,12 +26,12 @@ class FragmentoListaAmigos : Fragment() {
         val view = inflater.inflate(R.layout.fragmento_amigo_lista, container, false)
         if (view is RecyclerView) {
             with(view) {
-                modeloVistaAmigos = ViewModelProviders.of(this@FragmentoListaAmigos).get(ModeloVistaAmigos::class.java)
+                modeloVistaAmigos = ViewModelProviders.of(this@ListaAmigos).get(ModeloVistaAmigos::class.java)
                 if (modeloVistaAmigos.listaAmigos.value == null)
                     modeloVistaAmigos.buscarAmigos()
-                modeloVistaAmigos.listaAmigos.observe(this@FragmentoListaAmigos, this@FragmentoListaAmigos.observadorEstadoRegistro)
+                modeloVistaAmigos.listaAmigos.observe(this@ListaAmigos, this@ListaAmigos.observadorEstadoRegistro)
                 layoutManager = LinearLayoutManager(context)
-                adaptadorVistaAmigos = modeloVistaAmigos.listaAmigos.value?.values?.let { AmigoRecyclerViewAdaptador(it, this@FragmentoListaAmigos.context!!) }
+                adaptadorVistaAmigos = modeloVistaAmigos.listaAmigos.value?.values?.let { AdaptadorAmigo(it, this@ListaAmigos.context!!) }
                 adapter = adaptadorVistaAmigos
             }
         }

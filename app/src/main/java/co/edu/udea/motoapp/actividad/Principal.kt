@@ -9,14 +9,15 @@ import androidx.fragment.app.FragmentPagerAdapter
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.viewpager.widget.ViewPager
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.ui.inicio.FragmentInicio
-import co.edu.udea.motoapp.ui.lista_amigos.FragmentoListaAmigos
+import co.edu.udea.motoapp.ui.inicio.Inicio
+import co.edu.udea.motoapp.ui.lista_amigos.ListaAmigos
 import com.firebase.ui.auth.AuthUI
 
 import kotlinx.android.synthetic.main.actividad_principal.*
 
-class ActividadPrincipal : AppCompatActivity() {
+class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -27,6 +28,7 @@ class ActividadPrincipal : AppCompatActivity() {
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         container.adapter = mSectionsPagerAdapter
         tabs_principal.setupWithViewPager(container)
+        container.addOnPageChangeListener(this@Principal)
     }
 
 
@@ -41,19 +43,48 @@ class ActividadPrincipal : AppCompatActivity() {
             AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener {
-                    startActivity(Intent(this@ActividadPrincipal, ActividadAutenticacion::class.java))
+                    startActivity(Intent(this@Principal, Autenticacion::class.java))
                 }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onPageScrollStateChanged(state: Int) {
+
+    }
+
+    override fun onPageScrolled(posicion: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        this@Principal.actualizarBotonFlotante(posicion)
+    }
+
+    override fun onPageSelected(posicion: Int) {
+        actualizarBotonFlotante(posicion)
+    }
+
+    private fun actualizarBotonFlotante(posicion: Int) {
+        when (posicion) {
+            2 -> {
+                botonFlotante.setImageDrawable(this@Principal.getDrawable(R.drawable.ic_anadir_amigo))
+                botonFlotante.show()
+                botonFlotante.setOnClickListener {
+                    startActivity(Intent(this@Principal, Principal::class.java))
+                }
+            }
+
+            else -> {
+                botonFlotante.setOnClickListener {  }
+                botonFlotante.hide()
+            }
+        }
+    }
+
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                1 -> FragmentInicio.nuevaInstancia()
-                2 -> FragmentoListaAmigos ()
+                1 -> Inicio.nuevaInstancia()
+                2 -> ListaAmigos ()
                 else -> Fragment()
             }
         }

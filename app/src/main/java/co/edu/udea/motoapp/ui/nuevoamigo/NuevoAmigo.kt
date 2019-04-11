@@ -1,4 +1,4 @@
-package co.edu.udea.motoapp.ui.inicio
+package co.edu.udea.motoapp.ui.nuevoamigo
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,23 +9,25 @@ import android.view.ViewGroup
 import co.edu.udea.motoapp.R
 
 
-class FragmentInicio : Fragment() {
+class NuevoAmigo : Fragment() {
 
     companion object {
-        fun nuevaInstancia() = FragmentInicio()
+        fun newInstance() = NuevoAmigo()
     }
 
-    private lateinit var viewModel: ModeloVistaInicio
+    private lateinit var viewModel: ModeloVistaNuevoAmigo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragmento_inicio, container, false)
+    ): View {
+        return inflater.inflate(R.layout.fragmento_nuevo_amigo, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ModeloVistaInicio::class.java)
+        viewModel = ViewModelProviders.of(this).get(ModeloVistaNuevoAmigo::class.java)
+        // TODO: Use the ViewModel
     }
+
 }

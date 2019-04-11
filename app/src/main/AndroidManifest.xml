@@ -3,24 +3,26 @@
           package="co.edu.udea.motoapp">
 
     <application
-            android:name="MotoApp"
+            android:name=".MotoApp"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".actividad.ActividadAutenticacion">
+        <activity android:name=".actividad.NuevoAmigo">
+        </activity>
+        <activity android:name=".actividad.Autenticacion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".actividad.ActividadRegistro">
+        <activity android:name=".actividad.Registro">
         </activity>
         <activity
-                android:name=".actividad.ActividadPrincipal"
+                android:name=".actividad.Principal"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>

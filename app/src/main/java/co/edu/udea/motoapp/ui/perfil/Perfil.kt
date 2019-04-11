@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.actividad.ActividadAutenticacion
-import co.edu.udea.motoapp.actividad.ActividadRegistro
+import co.edu.udea.motoapp.actividad.Autenticacion
+import co.edu.udea.motoapp.actividad.Registro
 import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.util.TransformacionImagen
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragmento_perfil.*
 
 
 
-class FragmentoPerfil : Fragment() {
+class Perfil : Fragment() {
 
     lateinit var motero: Motero
     val moteroFirebase = FirebaseAuth.getInstance().currentUser
@@ -38,15 +38,15 @@ class FragmentoPerfil : Fragment() {
             if (motero == null) {
                 manejarUsuarioNoRegistrado()
             } else {
-                this@FragmentoPerfil.motero = motero
+                this@Perfil.motero = motero
                 actualizarVistaPerfil()
             }
         }
     }
 
     private fun manejarUsuarioNoRegistrado() {
-        Toast.makeText(this@FragmentoPerfil.context, "Usuario no registrado", Toast.LENGTH_LONG).show()
-        startActivity(Intent(this@FragmentoPerfil.context, ActividadRegistro::class.java))
+        Toast.makeText(this@Perfil.context, "Usuario no registrado", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this@Perfil.context, Registro::class.java))
     }
 
     private fun actualizarVistaPerfil() {
@@ -86,7 +86,7 @@ class FragmentoPerfil : Fragment() {
     }
 
     private fun manejarUsuarioNoAutenticado() {
-        Toast.makeText(this@FragmentoPerfil.context, "Usuario no inicio sesion", Toast.LENGTH_LONG).show()
-        startActivity(Intent(this@FragmentoPerfil.context, ActividadAutenticacion::class.java))
+        Toast.makeText(this@Perfil.context, "Usuario no inicio sesion", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this@Perfil.context, Autenticacion::class.java))
     }
 }
