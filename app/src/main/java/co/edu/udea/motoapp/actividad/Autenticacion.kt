@@ -7,9 +7,9 @@ import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.excepcion.ExcepcionAutenticacion
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
-class ActividadAutenticacion : Activity() {
+class Autenticacion : Activity() {
     private val CODIGO_VALIDACION = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class ActividadAutenticacion : Activity() {
         if (FirebaseAuth.getInstance().currentUser == null)
             this.iniciarAutenticacion()
         else
-            startActivity(Intent(this@ActividadAutenticacion, ActividadPrincipal::class.java))
+            iniciarActividad(Principal::class.java)
     }
 
     private fun iniciarAutenticacion() {
@@ -50,8 +50,13 @@ class ActividadAutenticacion : Activity() {
         val metadata = motero?.metadata ?: throw ExcepcionAutenticacion("Error cargarndo datos del usuario")
         val esNuevoMotero = metadata.creationTimestamp - metadata.lastSignInTimestamp
         if (esNuevoMotero > -10 && esNuevoMotero < 10)
-            startActivity(Intent(this@ActividadAutenticacion, ActividadRegistro::class.java))
+            iniciarActividad(Registro::class.java)
         else
-            startActivity(Intent(this@ActividadAutenticacion, ActividadPrincipal::class.java))
+            iniciarActividad(Principal::class.java)
+    }
+
+    private fun iniciarActividad(actividad: Class<*>) {
+        startActivity(Intent(this@Autenticacion, actividad))
+        finish()
     }
 }

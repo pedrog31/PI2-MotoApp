@@ -11,8 +11,8 @@ import co.edu.udea.motoapp.util.TransformacionImagen
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragmento_amigo.view.*
 
-class AmigoRecyclerViewAdaptador(private val amigosMoteros: MutableCollection<Motero>, private val contexto: Context):
-    RecyclerView.Adapter<AmigoRecyclerViewAdaptador.AmigoViewHolder>() {
+class AdaptadorAmigo(private val amigosMoteros: MutableCollection<Motero>, private val contexto: Context):
+    RecyclerView.Adapter<AdaptadorAmigo.AmigoViewHolder>() {
 
     inner class AmigoViewHolder(val vistaFragmentoAmigo: View) : RecyclerView.ViewHolder(vistaFragmentoAmigo)
 
