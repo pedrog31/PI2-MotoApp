@@ -13,11 +13,12 @@ class ModeloVistaRegistro : ViewModel() {
     val moteroActual = FirebaseAuth.getInstance().currentUser ?: throw ExcepcionAutenticacion("Error cargando datos para el registro")
     val repositorioMoteros = FirebaseDatabase.getInstance().getReference("moteros")
 
-    fun guardarInformacionMotero(nombre: String, correo: String, celular: String, ciudad: String) {
+    fun guardarInformacionMotero(nombre: String, correo: String, ciudad: String, celular: String) {
         moteroActual.updateEmail(correo).addOnSuccessListener {
             this.repositorioMoteros
                 .child(moteroActual.uid)
-                .setValue(Motero(nombre, correo,  ciudad, celular, mutableListOf("CREADO")))
+                .setValue(
+                    Motero(nombre, correo,  ciudad, celular, moteroActual.photoUrl.toString(), mutableListOf("CREADO")))
                 .addOnSuccessListener {
                     estadoRegistro.value = "ok"
                 }
