@@ -54,7 +54,7 @@ class FragmentoPerfil : Fragment() {
         valor_texto_celular.setText(motero.celular)
         valor_texto_ciudad.setText(motero.ciudad)
         valor_texto_correo.setText(motero.correo)
-        if (moteroFirebase != null) {
+        if (moteroFirebase != null && moteroFirebase.photoUrl != null) {
             Picasso.get()
                 .load(moteroFirebase.photoUrl)
                 .centerCrop()

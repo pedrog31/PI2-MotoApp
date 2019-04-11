@@ -6,10 +6,14 @@
 
     <string name="accion_cerrar_sesion">Cerrar sesion</string>
     <string name="completar_registro">Completar registro</string>
-    <string name="celular">Celular</string>
-    <string name="ciudad">Ciudad</string>
-    <string name="correo_electronico">Correo electronico</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre">Nombre:</string>
+    <string name="celular">Celular:</string>
+    <string name="ciudad">Ciudad:</string>
+    <string name="correo">Correo:</string>
+    <string name="amigo_nombre">Nombre: %1$s</string>
+    <string name="amigo_celular">Celular: %1$s</string>
+    <string name="amigo_ciudad">Ciudad: %1$s</string>
+    <string name="amigo_correo">Correo: %1$s</string>
     <string name="tab_principal_rutas">Rutas</string>
     <string name="tab_principal_inicio">Inicio</string>
     <string name="tab_principal_amigos">Amigos</string>

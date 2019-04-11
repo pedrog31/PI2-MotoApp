@@ -15,14 +15,13 @@ import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.actividad.ActividadAutenticacion
 import co.edu.udea.motoapp.actividad.ActividadPrincipal
 import kotlinx.android.synthetic.main.fragmento_registro.*
-import com.google.android.gms.tasks.OnCompleteListener
 import com.firebase.ui.auth.AuthUI
 
 
 
 class FragmentoRegistro : Fragment() {
 
-    private lateinit var viewModel: ModeloVistaRegistro
+    private lateinit var modeloVistaRegistro: ModeloVistaRegistro
 
     private val observadorEstadoRegistro = Observer<String> { estado ->
         estado?.let {
@@ -56,7 +55,7 @@ class FragmentoRegistro : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ModeloVistaRegistro::class.java)
+        modeloVistaRegistro = ViewModelProviders.of(this).get(ModeloVistaRegistro::class.java)
         llenarFormularioRegistro()
         completar_registro.setOnClickListener {
             this.guardarInformacionMotero()
@@ -66,21 +65,21 @@ class FragmentoRegistro : Fragment() {
                 this.guardarInformacionMotero()
             true
         }
-        viewModel.estadoRegistro.observe(this@FragmentoRegistro, this.observadorEstadoRegistro)
+        modeloVistaRegistro.estadoRegistro.observe(this@FragmentoRegistro, this.observadorEstadoRegistro)
     }
 
     private fun llenarFormularioRegistro() {
-        registro_nombre.setText(viewModel.moteroActual.displayName)
-        registro_correo.setText(viewModel.moteroActual.email)
-        registro_celular.setText(viewModel.moteroActual.phoneNumber)
+        registro_nombre.setText(modeloVistaRegistro.moteroActual.displayName)
+        registro_correo.setText(modeloVistaRegistro.moteroActual.email)
+        registro_celular.setText(modeloVistaRegistro.moteroActual.phoneNumber)
     }
 
     private fun guardarInformacionMotero() {
-        viewModel.guardarInformacionMotero (
+        modeloVistaRegistro.guardarInformacionMotero (
             registro_nombre.text.toString(),
             registro_correo.text.toString(),
-            registro_celular.text.toString(),
-            registro_ciudad.text.toString())
+            registro_ciudad.text.toString(),
+            registro_celular.text.toString())
     }
 
     private fun completarRegistroExitoso() {

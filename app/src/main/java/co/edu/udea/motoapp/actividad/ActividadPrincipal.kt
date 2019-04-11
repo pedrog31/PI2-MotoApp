@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.ui.inicio.FragmentInicio
+import co.edu.udea.motoapp.ui.lista_amigos.FragmentoListaAmigos
 import com.firebase.ui.auth.AuthUI
 
 import kotlinx.android.synthetic.main.actividad_principal.*
@@ -52,6 +53,7 @@ class ActividadPrincipal : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 1 -> FragmentInicio.nuevaInstancia()
+                2 -> FragmentoListaAmigos ()
                 else -> Fragment()
             }
         }
