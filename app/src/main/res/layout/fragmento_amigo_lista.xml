@@ -11,4 +11,4 @@
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ui.lista_amigos.ListaAmigos"
-        tools:listitem="@layout/fragmento_amigo"/>
+        tools:listitem="@layout/tarjeta_amigo_motero"/>

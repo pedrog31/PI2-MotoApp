@@ -2,9 +2,9 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_height="150dp" android:layout_margin="5dp">
+        android:layout_height="170dp" android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -55,9 +55,9 @@
                     android:ellipsize="end"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imagen_amigo" android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/texto_ciudad_amigo"
                     android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/texto_correo_amigo"
-                    app:layout_constraintHorizontal_bias="0.1"/>
+                    app:layout_constraintHorizontal_bias="0.1"
+                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/texto_ciudad_amigo"/>
             <TextView
                     android:text="@string/ciudad"
                     android:layout_width="0dp"
@@ -65,12 +65,21 @@
                     android:lines="1"
                     android:scrollHorizontally="true"
                     android:ellipsize="end"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imagen_amigo" android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/texto_celular_amigo"
-                    app:layout_constraintHorizontal_bias="0.1"/>
+                    app:layout_constraintEnd_toStartOf="@+id/boton_agregar_amigo" android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/texto_celular_amigo"/>
+            <Button
+                    android:id="@+id/boton_agregar_amigo"
+                    android:text="@string/agregar_amigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/texto_ciudad_amigo" android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/texto_celular_amigo" android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

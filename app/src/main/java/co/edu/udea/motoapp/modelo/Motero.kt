@@ -6,9 +6,10 @@ class Motero(
     val celular: String,
     val ciudad: String,
     val urlFoto: String,
+    val amigos: MutableList<String>,
     val retos: MutableList<String>) {
 
-    constructor() : this("", "", "", "", "",mutableListOf()) {
+    constructor() : this("", "", "", "", "",mutableListOf(), mutableListOf()) {
 
     }
 

@@ -25,6 +25,7 @@ class NuevoAmigo : AppCompatActivity() {
         onSearchRequested()
         manejarIntent(intent)
         nuevoAmigoBotonFlotante.setOnClickListener {
+            nuevoAmigoBotonFlotante.hide()
             onSearchRequested()
         }
         modeloVistaNuevoAmigo = ViewModelProviders.of(this).get(ModeloVistaNuevoAmigo::class.java)
@@ -38,6 +39,8 @@ class NuevoAmigo : AppCompatActivity() {
 
     private fun manejarIntent(intent: Intent) {
         if (Intent.ACTION_SEARCH == intent.action) {
+            nuevoAmigoBotonFlotante.hide()
+            modeloVistaNuevoAmigo.listaMoteros.value?.clear()
             intent.getStringExtra(SearchManager.QUERY)?.also { query ->
                 enviarPalabraClaveBusqueda(query)
             }
@@ -45,6 +48,7 @@ class NuevoAmigo : AppCompatActivity() {
     }
 
     private fun enviarPalabraClaveBusqueda(palabraClave: String) {
+        nuevoAmigoBotonFlotante.show()
         modeloVistaNuevoAmigo.palabraClave.value = palabraClave
     }
 }

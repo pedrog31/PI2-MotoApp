@@ -39,7 +39,9 @@ class ListaAmigos : Fragment() {
                     modeloVistaAmigos.listaAmigos.observe(it, this@ListaAmigos.observadorListaAmigos)
                 }
                layoutManager = LinearLayoutManager(context)
-                adaptadorVistaAmigos = modeloVistaAmigos.listaAmigos.value?.values?.let { AdaptadorAmigo(it, this@ListaAmigos.context!!) }
+                adaptadorVistaAmigos = modeloVistaAmigos.listaAmigos.value?.let {
+                    AdaptadorAmigo(it, this@ListaAmigos.activity!!,false)
+                }
                 adapter = adaptadorVistaAmigos
             }
         }

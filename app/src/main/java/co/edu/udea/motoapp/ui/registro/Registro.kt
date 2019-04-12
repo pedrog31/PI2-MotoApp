@@ -63,7 +63,7 @@ class Registro : Fragment() {
         completar_registro.setOnClickListener {
             this.guardarInformacionMotero()
         }
-        registro_ciudad.setOnKeyListener { vista, codigoTecla, evento ->
+        registro_ciudad.setOnKeyListener { _, codigoTecla, evento ->
             if (evento.getAction() == KeyEvent.ACTION_DOWN && codigoTecla == KeyEvent.KEYCODE_ENTER)
                 this.guardarInformacionMotero()
             true
@@ -78,7 +78,7 @@ class Registro : Fragment() {
 
     private fun guardarInformacionMotero() {
         modeloVistaRegistro.guardarInformacionMotero (
-            registro_nombre.text.toString(),
+            registro_nombre.text.toString().toUpperCase(),
             registro_correo.text.toString(),
             registro_ciudad.text.toString(),
             registro_celular.text.toString())

@@ -18,4 +18,6 @@
     <string name="tab_principal_inicio">Inicio</string>
     <string name="tab_principal_amigos">Amigos</string>
     <string name="buscar_amigos">Buscar amigos</string>
+    <string name="agregar_amigo">Agregar</string>
+    <string name="resultado_busqueda">Encontramos %1$d moteros con tu busqueda</string>
 </resources>
