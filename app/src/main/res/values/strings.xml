@@ -17,4 +17,13 @@
     <string name="tab_principal_rutas">Rutas</string>
     <string name="tab_principal_inicio">Inicio</string>
     <string name="tab_principal_amigos">Amigos</string>
+    <string name="buscar_amigos">Buscar amigos</string>
+    <string name="agregar_amigo">Agregar</string>
+    <string name="resultado_busqueda_nuevo_amigo">Encontramos %1$d moteros con tu busqueda</string>
+    <string name="resultado_busqueda_solicitudes">Tienes %1$d solicitudes de amistad</string>
+    <string name="tipo_solicitud">solicitud</string>
+    <string name="tipo_aceptacion">aceptacion</string>
+    <string name="revisar">Revisar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="rechazar_amigo">Rechazar</string>
 </resources>

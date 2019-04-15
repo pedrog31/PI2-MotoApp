@@ -65,16 +65,16 @@ class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
     private fun actualizarBotonFlotante(posicion: Int) {
         when (posicion) {
             2 -> {
-                botonFlotante.setImageDrawable(this@Principal.getDrawable(R.drawable.ic_anadir_amigo))
-                botonFlotante.show()
-                botonFlotante.setOnClickListener {
-                    startActivity(Intent(this@Principal, Principal::class.java))
+                principalBotonFlotante.setImageDrawable(this@Principal.getDrawable(R.drawable.ic_anadir_amigo))
+                principalBotonFlotante.show()
+                principalBotonFlotante.setOnClickListener {
+                    startActivity(Intent(this@Principal, NuevoAmigo::class.java))
                 }
             }
 
             else -> {
-                botonFlotante.setOnClickListener {  }
-                botonFlotante.hide()
+                principalBotonFlotante.setOnClickListener {  }
+                principalBotonFlotante.hide()
             }
         }
     }

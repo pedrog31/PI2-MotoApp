@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 
 import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.actividad.Autenticacion
@@ -14,49 +16,43 @@ import co.edu.udea.motoapp.actividad.Registro
 import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.util.TransformacionImagen
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragmento_perfil.*
 
-
-
 class Perfil : Fragment() {
 
-    lateinit var motero: Motero
-    val moteroFirebase = FirebaseAuth.getInstance().currentUser
+    private lateinit var modeloVistaMotero: ModeloVistaMotero
 
-    val escuchadorMotero = object : ValueEventListener {
-        override fun onCancelled(error: DatabaseError) {
-
-        }
-
-        override fun onDataChange(resultado: DataSnapshot) {
-            val motero = resultado.getValue(Motero::class.java)
-            if (motero == null) {
-                manejarUsuarioNoRegistrado()
-            } else {
-                this@Perfil.motero = motero
-                actualizarVistaPerfil()
-            }
+    private val observadorPerfil = Observer<Motero> { motero ->
+        when {
+            motero == null -> manejarUsuarioNoRegistrado()
+            motero.correo == "" -> manejarUsuarioNoAutenticado()
+            else -> actualizarVistaPerfil(motero)
         }
     }
 
-    private fun manejarUsuarioNoRegistrado() {
-        Toast.makeText(this@Perfil.context, "Usuario no registrado", Toast.LENGTH_LONG).show()
-        startActivity(Intent(this@Perfil.context, Registro::class.java))
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragmento_perfil, container, false)
     }
 
-    private fun actualizarVistaPerfil() {
-        valor_texto_nombre.setText(motero.nombre)
-        valor_texto_celular.setText(motero.celular)
-        valor_texto_ciudad.setText(motero.ciudad)
-        valor_texto_correo.setText(motero.correo)
-        if (moteroFirebase != null && moteroFirebase.photoUrl != null) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity?.let {
+            modeloVistaMotero = ViewModelProviders.of(it).get(ModeloVistaMotero::class.java)
+            modeloVistaMotero.motero.observe(it, observadorPerfil)
+            modeloVistaMotero.buscarMotero()
+        }
+    }
+
+    private fun actualizarVistaPerfil(motero: Motero) {
+        valor_texto_nombre.text = motero.nombre
+        valor_texto_celular.text = motero.celular
+        valor_texto_ciudad.text = motero.ciudad
+        valor_texto_correo.text = motero.correo
+        if (modeloVistaMotero.moteroFirebase.photoUrl != null) {
             Picasso.get()
-                .load(moteroFirebase.photoUrl)
+                .load(modeloVistaMotero.moteroFirebase.photoUrl)
                 .centerCrop()
                 .transform(TransformacionImagen(100, 0))
                 .fit()
@@ -64,29 +60,13 @@ class Perfil : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragmento_perfil, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val identificadorUsuarioFirebase = FirebaseAuth.getInstance().uid
-        if (identificadorUsuarioFirebase == null)
-            manejarUsuarioNoAutenticado()
-        else
-            FirebaseDatabase
-                .getInstance()
-                .reference
-                .child("moteros")
-                .child(identificadorUsuarioFirebase)
-                .addListenerForSingleValueEvent(escuchadorMotero)
-    }
-
     private fun manejarUsuarioNoAutenticado() {
         Toast.makeText(this@Perfil.context, "Usuario no inicio sesion", Toast.LENGTH_LONG).show()
         startActivity(Intent(this@Perfil.context, Autenticacion::class.java))
+    }
+
+    private fun manejarUsuarioNoRegistrado() {
+        Toast.makeText(this@Perfil.context, "Usuario no registrado", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this@Perfil.context, Registro::class.java))
     }
 }

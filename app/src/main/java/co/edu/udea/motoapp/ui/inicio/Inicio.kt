@@ -26,6 +26,8 @@ class Inicio : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ModeloVistaInicio::class.java)
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(ModeloVistaInicio::class.java)
+        }
     }
 }
