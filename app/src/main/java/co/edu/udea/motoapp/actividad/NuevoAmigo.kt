@@ -17,6 +17,7 @@ class NuevoAmigo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.actividad_nuevo_amigo)
+        modeloVistaNuevoAmigo = ViewModelProviders.of(this).get(ModeloVistaNuevoAmigo::class.java)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, NuevoAmigo.newInstance())
@@ -28,7 +29,6 @@ class NuevoAmigo : AppCompatActivity() {
             nuevoAmigoBotonFlotante.hide()
             onSearchRequested()
         }
-        modeloVistaNuevoAmigo = ViewModelProviders.of(this).get(ModeloVistaNuevoAmigo::class.java)
     }
 
     override fun onNewIntent(intent: Intent) {

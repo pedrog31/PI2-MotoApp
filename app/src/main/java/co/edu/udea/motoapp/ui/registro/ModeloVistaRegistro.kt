@@ -18,7 +18,7 @@ class ModeloVistaRegistro : ViewModel() {
             this.repositorioMoteros
                 .child(moteroActual.uid)
                 .setValue(
-                    Motero(nombre, correo, celular,  ciudad, moteroActual.photoUrl.toString(), mutableListOf("CREADO"), mutableListOf()))
+                    Motero(nombre, correo, celular,  ciudad, moteroActual.photoUrl.toString(), hashMapOf(), mutableListOf()))
                 .addOnSuccessListener {
                     estadoRegistro.value = "ok"
                 }

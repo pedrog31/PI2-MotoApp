@@ -29,8 +29,8 @@ class NuevoAmigo : Fragment() {
     private val observadorListaAmigos = Observer<HashMap<String, Motero>> { listaAmigos ->
         listaAmigos?.let {
             adaptadorVistaNuevosAmigos?.notifyDataSetChanged()
-            resultado_busqueda.text = getString(R.string.resultado_busqueda, listaAmigos.size)
-            resultado_busqueda.visibility = View.VISIBLE
+            resultado_busqueda_nuevo_amigo.text = getString(R.string.resultado_busqueda_nuevo_amigo, listaAmigos.size)
+            resultado_busqueda_nuevo_amigo.visibility = View.VISIBLE
         }
     }
 
@@ -57,7 +57,7 @@ class NuevoAmigo : Fragment() {
         modeloVistaNuevoAmigo.buscarAmigos()
         if (adaptadorVistaNuevosAmigos == null) {
             adaptadorVistaNuevosAmigos = modeloVistaNuevoAmigo.listaMoteros.value?.let {
-                AdaptadorAmigo(it, this@NuevoAmigo.activity!!, true)
+                AdaptadorAmigo(it, this@NuevoAmigo.activity!!, getString(R.string.tipo_solicitud))
             }
             lista_amigos.adapter = adaptadorVistaNuevosAmigos
         }

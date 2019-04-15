@@ -40,7 +40,7 @@ class ListaAmigos : Fragment() {
                 }
                layoutManager = LinearLayoutManager(context)
                 adaptadorVistaAmigos = modeloVistaAmigos.listaAmigos.value?.let {
-                    AdaptadorAmigo(it, this@ListaAmigos.activity!!,false)
+                    AdaptadorAmigo(it, this@ListaAmigos.activity!!,null)
                 }
                 adapter = adaptadorVistaAmigos
             }

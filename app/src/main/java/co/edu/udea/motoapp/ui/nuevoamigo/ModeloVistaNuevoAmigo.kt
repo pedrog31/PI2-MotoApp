@@ -48,7 +48,6 @@ class ModeloVistaNuevoAmigo : ViewModel() {
         override fun onCancelled(error: DatabaseError) {
 
         }
-
         override fun onDataChange(dato: DataSnapshot) {
             if (dato.exists())
                 dato.children.forEach {
@@ -61,9 +60,7 @@ class ModeloVistaNuevoAmigo : ViewModel() {
                 .endAt("${palabraClave.value?.toUpperCase()}\uf8ff")
                 .addChildEventListener(escuchadorBusquedaMoteros)
         }
-
     }
-
 
     fun buscarAmigos() {
         listaMoteros.value = hashMapOf()
@@ -71,7 +68,7 @@ class ModeloVistaNuevoAmigo : ViewModel() {
         repositorioMoteros.child("moteros/${identificacion}/amigos").addListenerForSingleValueEvent(escuchadorIdentificacionAmigos)
     }
 
-    fun agregarAmigo(identificacionAmigo: String, contexto: FragmentActivity) {
+    fun enviarSolicitudAmistad(identificacionAmigo: String, contexto: FragmentActivity) {
         val solicitudAmistad = identificacion?.let { SolicitudAmistad(it, identificacionAmigo) }
         repositorioMoteros.child("solicitudesAmistad").push().setValue(solicitudAmistad).addOnSuccessListener {
             mostrarMensaje("Solicitud de amistad enviada", contexto)
