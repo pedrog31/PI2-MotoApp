@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager
 import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.ui.inicio.Inicio
 import co.edu.udea.motoapp.ui.lista_amigos.ListaAmigos
+import co.edu.udea.motoapp.ui.rutas_privadas.ListaRutasPrivadas
 import com.firebase.ui.auth.AuthUI
 
 import kotlinx.android.synthetic.main.actividad_principal.*
@@ -64,6 +65,14 @@ class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private fun actualizarBotonFlotante(posicion: Int) {
         when (posicion) {
+            0 -> {
+                principalBotonFlotante.setImageDrawable(this@Principal.getDrawable(R.drawable.ic_anadir_amigo))
+                principalBotonFlotante.show()
+                principalBotonFlotante.setOnClickListener {
+                    startActivity(Intent(this@Principal, NuevaRuta::class.java))
+                }
+            }
+
             2 -> {
                 principalBotonFlotante.setImageDrawable(this@Principal.getDrawable(R.drawable.ic_anadir_amigo))
                 principalBotonFlotante.show()
@@ -83,6 +92,7 @@ class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
+                0 -> ListaRutasPrivadas.nuevaInstancia()
                 1 -> Inicio.nuevaInstancia()
                 2 -> ListaAmigos ()
                 else -> Fragment()
