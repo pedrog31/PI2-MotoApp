@@ -45,14 +45,15 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
-
+    implementation 'com.karumi:dexter:5.0.0'
+    implementation "com.google.android.gms:play-services-location:16.0.0"
     implementation 'com.github.jaiselrahman:HintSpinner:1.0.0' //borrar s no da
 
     implementation 'com.google.android.gms:play-services-places:16.0.0'
