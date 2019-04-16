@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="co.edu.udea.motoapp">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <application
             android:name=".MotoApp"
@@ -12,9 +14,18 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
 
-        <activity android:name=".actividad.NuevaRuta">
+        <activity
+                android:name=".actividad.MapaRutasPublicas"
+                android:label="@string/title_activity_mapa_rutas_publicas">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="co.edu.udea.motoapp.actividad.Principal"/>
         </activity>
+        <activity android:name=".actividad.NuevaRuta"/>
         <activity android:name=".actividad.Autenticacion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -46,7 +57,5 @@
                     android:name="android.app.searchable"
                     android:resource="@xml/buscable"/>
         </activity>
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCFcNkjg3ufiUtCKMMqbi75lc__0dlM4OU"/>
     </application>
-
 </manifest>

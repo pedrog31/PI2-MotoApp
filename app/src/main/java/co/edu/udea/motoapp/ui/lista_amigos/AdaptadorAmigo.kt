@@ -39,7 +39,7 @@ class AdaptadorAmigo(
         amigoViewHolder.vistaTarjetaMotero.texto_celular_amigo.text = recursos.getString(R.string.amigo_celular, amigoMotero.celular)
         amigoViewHolder.vistaTarjetaMotero.texto_correo_amigo.text = recursos.getString(R.string.amigo_correo, amigoMotero.correo)
         amigoViewHolder.vistaTarjetaMotero.texto_ciudad_amigo.text = recursos.getString(R.string.amigo_ciudad, amigoMotero.ciudad)
-        if (amigoMotero.urlFoto != "null")
+        if (amigoMotero.urlFoto != "" && amigoMotero.urlFoto != "null")
             Picasso.get()
                 .load(amigoMotero.urlFoto)
                 .centerCrop()
