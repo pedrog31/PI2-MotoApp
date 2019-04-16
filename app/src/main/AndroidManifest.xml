@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="co.edu.udea.motoapp">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
             android:name=".MotoApp"
             android:allowBackup="false"
@@ -12,6 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".actividad.NuevaRuta">
         </activity>
         <activity android:name=".actividad.Autenticacion">
@@ -45,6 +46,7 @@
                     android:name="android.app.searchable"
                     android:resource="@xml/buscable"/>
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCFcNkjg3ufiUtCKMMqbi75lc__0dlM4OU"/>
     </application>
 
 </manifest>

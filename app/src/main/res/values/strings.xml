@@ -26,4 +26,13 @@
     <string name="revisar">Revisar</string>
     <string name="aceptar">Aceptar</string>
     <string name="rechazar_amigo">Rechazar</string>
+
+
+
+
+    <string name="nombre_ruta">Nombre de la Ruta</string>
+    <string name="descripcion_ruta">Descripción</string>
+
+
+
 </resources>
