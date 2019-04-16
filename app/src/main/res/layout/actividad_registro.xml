@@ -5,4 +5,26 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".actividad.ActividadRegistro"/>
+        tools:context=".actividad.Registro">
+
+    <fragment
+            android:id="@+id/autocomplete_fragment1"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="153dp"
+            tools:layout_editor_absoluteX="8dp" android:layout_marginTop="8dp"
+           />
+
+    <TextView
+            android:id="@+id/placeName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Place selected"
+            android:textSize="20dp"
+    />
+</FrameLayout>
+
+
+
+
+

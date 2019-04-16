@@ -6,7 +6,7 @@
         android:id="@+id/fragmentoregistro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.registro.FragmentoRegistro">
+        tools:context=".ui.registro.Registro">
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
@@ -32,9 +32,9 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="textWebEmailAddress|textEmailAddress"
                 android:ems="10"
-                android:id="@+id/registro_correo" android:layout_weight="1" android:hint="@string/correo_electronico"/>
+                android:id="@+id/registro_correo" android:layout_weight="1" android:hint="@string/correo"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
@@ -60,7 +60,7 @@
         <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/registro_ciudad" android:layout_weight="1"
-        />
+                android:inputType="textAutoCorrect|textCapWords"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
             android:id="@+id/completar_registro"

@@ -1,16 +1,34 @@
 <resources>
     <string name="app_name">MotoApp</string>
-    <string name="default_web_client_id" translatable="false">
-        275475136526-jvm4eagbab3qc4ahhpqvkc2m44mok5et.apps.googleusercontent.com
-    </string>
-
     <string name="accion_cerrar_sesion">Cerrar sesion</string>
     <string name="completar_registro">Completar registro</string>
-    <string name="celular">Celular</string>
-    <string name="ciudad">Ciudad</string>
-    <string name="correo_electronico">Correo electronico</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre">Nombre:</string>
+    <string name="celular">Celular:</string>
+    <string name="ciudad">Ciudad:</string>
+    <string name="correo">Correo:</string>
+    <string name="amigo_nombre">Nombre: %1$s</string>
+    <string name="amigo_celular">Celular: %1$s</string>
+    <string name="amigo_ciudad">Ciudad: %1$s</string>
+    <string name="amigo_correo">Correo: %1$s</string>
     <string name="tab_principal_rutas">Rutas</string>
     <string name="tab_principal_inicio">Inicio</string>
     <string name="tab_principal_amigos">Amigos</string>
+    <string name="buscar_amigos">Buscar amigos</string>
+    <string name="agregar_amigo">Agregar</string>
+    <string name="resultado_busqueda_nuevo_amigo">Encontramos %1$d moteros con tu busqueda</string>
+    <string name="resultado_busqueda_solicitudes">Tienes %1$d solicitudes de amistad</string>
+    <string name="tipo_solicitud">solicitud</string>
+    <string name="tipo_aceptacion">aceptacion</string>
+    <string name="revisar">Revisar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="rechazar_amigo">Rechazar</string>
+    <string name="title_activity_mapa_rutas_publicas">Expora nuevas rutas</string>
+    <string name="default_web_client_id" translatable="false">
+        275475136526-jvm4eagbab3qc4ahhpqvkc2m44mok5et.apps.googleusercontent.com
+    </string>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyCtgyGccjWXg12pr7PUJInduBKDMPk4Rmc
+    </string>
+    <string name="nombre_ruta">Nombre de la Ruta</string>
+    <string name="descripcion_ruta">Descripción</string>
 </resources>
