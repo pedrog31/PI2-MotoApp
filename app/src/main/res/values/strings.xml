@@ -29,4 +29,6 @@
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
         AIzaSyCtgyGccjWXg12pr7PUJInduBKDMPk4Rmc
     </string>
+    <string name="nombre_ruta">Nombre de la Ruta</string>
+    <string name="descripcion_ruta">Descripción</string>
 </resources>

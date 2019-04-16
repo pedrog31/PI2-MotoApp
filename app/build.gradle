@@ -52,4 +52,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
+
+    implementation 'com.github.jaiselrahman:HintSpinner:1.0.0' //borrar s no da
+
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.seatgeek:placesautocomplete:0.3-SNAPSHOT'
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
 }

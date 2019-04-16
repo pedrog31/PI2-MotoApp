@@ -1,13 +1,24 @@
 package co.edu.udea.motoapp.modelo
 
-class Ruta(
+open class Ruta(
     val descripcion: String,
     val distancia: Int,
     val experiencia: Int,
-    val nivel: String,
+    val nivelDificultad: String,
     val nombre: String,
     val urlFoto: String,
-    val paradas: MutableList<ParadaRuta>) {
+    val paradas: MutableList<ParadaRuta>,
+    val calificacion: Float,
+    val numeroCalificaciones: Int) {
 
-    constructor() : this("", 0, 0, "", "", "", mutableListOf())
+    constructor() : this(
+        "",
+        0,
+        0,
+        "",
+        "",
+        "",
+        mutableListOf(),
+        0.0F,
+        0)
 }

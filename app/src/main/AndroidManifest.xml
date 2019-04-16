@@ -4,7 +4,7 @@
           package="co.edu.udea.motoapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
             android:name=".MotoApp"
             android:allowBackup="false"
@@ -25,6 +25,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="co.edu.udea.motoapp.actividad.Principal"/>
         </activity>
+        <activity android:name=".actividad.NuevaRuta"/>
         <activity android:name=".actividad.Autenticacion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -57,5 +58,4 @@
                     android:resource="@xml/buscable"/>
         </activity>
     </application>
-
 </manifest>
