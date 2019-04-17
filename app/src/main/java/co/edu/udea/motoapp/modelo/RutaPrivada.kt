@@ -20,4 +20,21 @@ class RutaPrivada (
         urlFoto = urlFoto,
         paradas = paradas,
         calificacion = calificacion,
-        numeroCalificaciones = numeroCalificaciones)
+        numeroCalificaciones = numeroCalificaciones) {
+
+    constructor(ruta: Ruta, propietario: String) :this(
+        ruta.descripcion,
+        ruta.distancia,
+        ruta.experiencia,
+        ruta.nivelDificultad,
+        ruta.nombre,
+        ruta.urlFoto,
+        ruta.paradas,
+        ruta.calificacion,
+        ruta.numeroCalificaciones,
+        propietario,
+        hashMapOf()
+    )
+
+    constructor() :this(Ruta(), "")
+}

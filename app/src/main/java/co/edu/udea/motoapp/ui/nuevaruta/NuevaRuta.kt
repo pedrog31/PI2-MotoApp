@@ -38,8 +38,7 @@ class NuevaRuta : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val geocoder = Geocoder(context, Locale.getDefault())
-        var address: List<Address>? = null
-        var p1: LatLng? = null
+        var address: List<Address>?
         val breakpoints = mutableListOf<ParadaRuta>()
         val moteroActual = FirebaseAuth.getInstance().currentUser ?: throw ExcepcionAutenticacion()
         val repositorioRutasPrivadas = FirebaseDatabase.getInstance().getReference("rutasPrivadas")

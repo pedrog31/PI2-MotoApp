@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import co.edu.udea.motoapp.R
+import co.edu.udea.motoapp.modelo.RutaPrivada
 
 
 class ListaRutasPrivadas : Fragment() {
@@ -15,19 +19,33 @@ class ListaRutasPrivadas : Fragment() {
         fun nuevaInstancia() = ListaRutasPrivadas()
     }
 
-    private lateinit var viewModel: ModeloVistaListaRutasPrivadas
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragmento_lista_rutas_privadas, container, false)
+    private var adaptadorVistaAmigos: AdaptadorRuta? = null
+    private val observadorListaRutasPrivadas = Observer<HashMap<String, RutaPrivada>> { listaRutas ->
+        listaRutas?.let {
+            adaptadorVistaAmigos?.notifyDataSetChanged()
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ModeloVistaListaRutasPrivadas::class.java)
-        // TODO: Use the ViewModel
-    }
+    private lateinit var modeloVistaListaRutasPrivadas: ModeloVistaListaRutasPrivadas
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragmento_lista_rutas_privadas, container, false)
+        if (view is RecyclerView) {
+            with(view) {
+                activity?.let {
+                    modeloVistaListaRutasPrivadas = ViewModelProviders.of(it).get(ModeloVistaListaRutasPrivadas::class.java)
+                    if (modeloVistaListaRutasPrivadas.listaRuta.value == null) {
+                        modeloVistaListaRutasPrivadas.buscarRutas()
+                    }
+                    modeloVistaListaRutasPrivadas.listaRuta.observe(it, this@ListaRutasPrivadas.observadorListaRutasPrivadas)
+                }
+                layoutManager = LinearLayoutManager(context)
+                adaptadorVistaAmigos = modeloVistaListaRutasPrivadas.listaRuta.value?.let {
+                    AdaptadorRuta(it, this@ListaRutasPrivadas.activity!!)
+                }
+                adapter = adaptadorVistaAmigos
+            }
+        }
+        return view
+    }
 }
