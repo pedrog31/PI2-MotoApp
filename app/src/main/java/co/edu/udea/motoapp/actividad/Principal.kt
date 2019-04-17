@@ -98,7 +98,7 @@ class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
             return when (position) {
                 0 -> ListaRutasPrivadas.nuevaInstancia()
                 1 -> Inicio.nuevaInstancia()
-                2 -> ListaAmigos ()
+                2 -> ListaAmigos.nuevaInstancia()
                 else -> Fragment()
             }
         }

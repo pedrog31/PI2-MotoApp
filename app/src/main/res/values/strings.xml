@@ -30,5 +30,12 @@
         AIzaSyCtgyGccjWXg12pr7PUJInduBKDMPk4Rmc
     </string>
     <string name="nombre_ruta">Nombre de la Ruta</string>
-    <string name="descripcion_ruta">Descripción</string>
+    <string name="descripcion_ruta">Descripción:</string>
+
+    <string name="experiencia_ruta">Experiencia: %1$d</string>
+    <string name="distancia_ruta">Distancia: %1$d Km</string>
+    <string name="dificultad_ruta">Dificultad: %1$s</string>
+    <string name="calificacion_ruta">Calificacion: %1$s</string>
+    <string name="agregar_ruta_publica">Agregar a mis rutas</string>
+    <string name="texto_estado_ruta_privada">Estado: implementacion futura</string>
 </resources>

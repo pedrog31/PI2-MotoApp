@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ListaAmigos : Fragment() {
 
+    companion object {
+        fun nuevaInstancia() = ListaAmigos()
+    }
+
     private lateinit var modeloVistaAmigos: ModeloVistaAmigos
     private var adaptadorVistaAmigos: AdaptadorAmigo? = null
     private val observadorListaAmigos = Observer<HashMap<String, Motero>> { listaAmigos ->
