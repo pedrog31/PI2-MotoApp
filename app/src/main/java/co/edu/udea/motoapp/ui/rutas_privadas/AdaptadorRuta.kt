@@ -1,5 +1,6 @@
 package co.edu.udea.motoapp.ui.rutas_privadas
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class AdaptadorRuta (
     }
 
     override fun onBindViewHolder(rutaViewHolder: RutaViewHolder, posicion: Int) {
+        Log.d("ruta",rutasPrivadas.elementAt(posicion).nombre)
         val amigoMotero = rutasPrivadas.elementAt(posicion)
         val recursos = this.contexto.resources
         rutaViewHolder.vistaTarjetaRuta.texto_nombre_ruta_privada.text =  amigoMotero.nombre

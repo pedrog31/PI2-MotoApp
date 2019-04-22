@@ -19,6 +19,7 @@ class ListaRutasPrivadas : Fragment() {
         fun nuevaInstancia() = ListaRutasPrivadas()
     }
 
+    private lateinit var modeloVistaListaRutasPrivadas: ModeloVistaListaRutasPrivadas
     private var adaptadorVistaAmigos: AdaptadorRuta? = null
     private val observadorListaRutasPrivadas = Observer<HashMap<String, RutaPrivada>> { listaRutas ->
         listaRutas?.let {
@@ -26,7 +27,6 @@ class ListaRutasPrivadas : Fragment() {
         }
     }
 
-    private lateinit var modeloVistaListaRutasPrivadas: ModeloVistaListaRutasPrivadas
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragmento_lista_rutas_privadas, container, false)
