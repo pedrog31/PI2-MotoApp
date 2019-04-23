@@ -2,6 +2,7 @@ package co.edu.udea.motoapp.ui.nuevaruta
 
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -69,7 +70,7 @@ class NuevaRuta : Fragment() {
             breakpoints.add(final)
 
             val ruta = RutaPrivada(
-                descripcion_ruta.text.toString(),0,
+                descripcion_ruta.text.toString(),calcularDistancia(breakpoints),
                 0,
                 "Dificil",
                 nombre_ruta.text.toString(),
@@ -160,5 +161,22 @@ class NuevaRuta : Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(this.context)
         mAdapter.RecyclerAdapter(breakpointsParadas, this.requireContext())
         mRecyclerView.adapter = mAdapter
+    }
+
+    fun calcularDistancia(paradasRuta: MutableList<ParadaRuta>): Int{
+        var distancia=0
+        for (i in 0 until paradasRuta.size-1){
+            var loc1 = getLocation(paradasRuta[i].latitud,paradasRuta[i].longitud)
+            var loc2 = getLocation(paradasRuta[i+1].latitud,paradasRuta[i+1].longitud)
+            distancia+=loc1.distanceTo(loc2).toInt();
+        }
+        return distancia/1000
+    }
+
+    fun getLocation(lat: Double, lng:Double):Location{
+        val loc1 = Location("")
+        loc1.latitude=lat
+        loc1.longitude=lng
+        return  loc1
     }
 }

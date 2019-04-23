@@ -1,17 +1,22 @@
 package co.edu.udea.motoapp.modelo
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
+@Parcelize
 class RutaPrivada (
-    descripcion: String,
-    distancia: Int,
-    experiencia: Int,
-    nivelDificultad: String,
-    nombre: String,
-    urlFoto: String,
-    paradas: MutableList<ParadaRuta>,
-    calificacion: Float,
-    numeroCalificaciones: Int,
+    override val descripcion: String,
+    override val distancia: Int,
+    override val experiencia: Int,
+    override val nivelDificultad: String,
+    override val nombre: String,
+    override val urlFoto: String,
+    override val paradas: @RawValue MutableList<ParadaRuta>,
+    override val calificacion: Float,
+    override val numeroCalificaciones: Int,
     val propietario: String,
-    val participantes: HashMap<String, Boolean>): Ruta(
+    val participantes: HashMap<String, Boolean>): Parcelable, Ruta(
         descripcion = descripcion,
         distancia = distancia,
         experiencia = experiencia,

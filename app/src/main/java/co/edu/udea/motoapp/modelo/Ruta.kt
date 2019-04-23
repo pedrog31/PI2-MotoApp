@@ -1,15 +1,15 @@
 package co.edu.udea.motoapp.modelo
 
 open class Ruta(
-    val descripcion: String,
-    val distancia: Int,
-    val experiencia: Int,
-    val nivelDificultad: String,
-    val nombre: String,
-    val urlFoto: String,
-    val paradas: MutableList<ParadaRuta>,
-    val calificacion: Float,
-    val numeroCalificaciones: Int) {
+    open val descripcion: String,
+    open val distancia: Int,
+    open val experiencia: Int,
+    open val nivelDificultad: String,
+    open val nombre: String,
+    open val urlFoto: String,
+    open val paradas: MutableList<ParadaRuta>,
+    open val calificacion: Float,
+    open val numeroCalificaciones: Int) {
 
     constructor() : this(
         "",
