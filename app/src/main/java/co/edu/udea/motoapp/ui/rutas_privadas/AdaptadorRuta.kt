@@ -35,6 +35,7 @@ class AdaptadorRuta (
     }
 
     override fun onBindViewHolder(rutaViewHolder: RutaViewHolder, posicion: Int) {
+        val keyRutaPrivada = keysRutasPrivadas.elementAt(posicion)
         val rutaPrivada = rutasPrivadas.elementAt(posicion)
         val recursos = this.contexto.resources
         rutaViewHolder.vistaTarjetaRuta.texto_nombre_ruta_privada.text =  rutaPrivada.nombre
@@ -50,10 +51,10 @@ class AdaptadorRuta (
                 .transform(TransformacionImagen(40, 0))
                 .fit()
                 .into(rutaViewHolder.vistaTarjetaRuta.imagen_ruta_privada)
-
         rutaViewHolder.itemView.setOnClickListener { _ ->
             val rutaIniciadaIntent = Intent(contexto, RutaIniciada::class.java)
             rutaIniciadaIntent.putExtra("ruta", rutaPrivada)
+            rutaIniciadaIntent.putExtra("key_ruta", keyRutaPrivada)
             contexto.startActivity(rutaIniciadaIntent)
 
         }

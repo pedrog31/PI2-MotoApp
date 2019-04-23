@@ -52,6 +52,7 @@ class RutaIniciada : AppCompatActivity() {
     private fun mostrarFragmentoMapaRutasPublicas() {
         modeloVistaRutaIniciada = ViewModelProviders.of(this).get(ModeloVistaRutaIniciada::class.java)
         modeloVistaRutaIniciada.rutaActual.value = intent?.extras?.getParcelable("ruta") ?: return
+        modeloVistaRutaIniciada.keyRutaActual.value = intent?.extras?.getString("key_ruta") ?: return
         setContentView(R.layout.actividad_ruta_iniciada)
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, RutaIniciada.newInstance())

@@ -64,4 +64,7 @@
     <string name="imagen_ruta">Imagen principal de la ruta</string>
     <string name="boton_mapa_ruta_mostrar">Mostrar mapa</string>
     <string name="boton_mapa_ruta_ocultar">Ocultar mapa</string>
+    <string name="boton_iniciar_ruta">Iniciar ruta</string>
+    <string name="boton_eliminar_ruta">Eliminar ruta</string>
+    <string name="estado_ruta_mensaje_espera">Debes esperar a que los integrantes de la ruta inicien el viaje</string>
 </resources>
