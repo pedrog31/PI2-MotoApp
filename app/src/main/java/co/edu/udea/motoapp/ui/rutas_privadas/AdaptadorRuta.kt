@@ -51,8 +51,7 @@ class AdaptadorRuta (
                 .fit()
                 .into(rutaViewHolder.vistaTarjetaRuta.imagen_ruta_privada)
 
-        rutaViewHolder.itemView.setOnClickListener { v ->
-            val position = posicion
+        rutaViewHolder.itemView.setOnClickListener { _ ->
             val rutaIniciadaIntent = Intent(contexto, RutaIniciada::class.java)
             rutaIniciadaIntent.putExtra("ruta", rutaPrivada)
             contexto.startActivity(rutaIniciadaIntent)

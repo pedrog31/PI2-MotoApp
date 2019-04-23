@@ -60,4 +60,8 @@
     <string name="choose_gallery">Choose from Gallery</string>
     <string name="url_androidwave">https://androidwave.com/</string>
     <string name="url_androidwave_android">https://androidwave.com/category/android/</string>
+    <string name="titulo_actividad_ruta_iniciada">MotoApp: %1$s</string>
+    <string name="imagen_ruta">Imagen principal de la ruta</string>
+    <string name="boton_mapa_ruta_mostrar">Mostrar mapa</string>
+    <string name="boton_mapa_ruta_ocultar">Ocultar mapa</string>
 </resources>

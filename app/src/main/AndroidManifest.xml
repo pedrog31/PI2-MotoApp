@@ -20,6 +20,9 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".actividad.RutaIniciada">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="co.edu.udea.motoapp.actividad.Principal"/>
         </activity>
 
         <meta-data
