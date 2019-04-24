@@ -7,6 +7,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.udea.motoapp.R
+import co.edu.udea.motoapp.util.TransformacionImagen
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.tarjeta_integrante_ruta.view.*
 
 class AdaptadorIntegranteRuta(private val contexto: FragmentActivity):
     RecyclerView.Adapter<AdaptadorIntegranteRuta.IntegranteRutaViewHolder>() {
@@ -21,9 +24,24 @@ class AdaptadorIntegranteRuta(private val contexto: FragmentActivity):
         return IntegranteRutaViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: IntegranteRutaViewHolder, position: Int) {
+    override fun onBindViewHolder(integranteRutaViewHolder: IntegranteRutaViewHolder, position: Int) {
+        val IntegranteRutaKey = modeloVistaRutaIniciada.listaIntegrantesRuta.value?.keys?.elementAt(position)
+        val moteroIntegranteRuta = modeloVistaRutaIniciada.listaMoterosIntegrantesRuta.value?.get(IntegranteRutaKey)
+        integranteRutaViewHolder.vistaTarjetaIntegranteRuta.texto_nombre_integrante_ruta.text = moteroIntegranteRuta?.nombre
 
+        if(moteroIntegranteRuta?.urlFoto != "null")
+            Picasso.get()
+                .load(moteroIntegranteRuta?.urlFoto)
+                .centerCrop()
+                .transform(TransformacionImagen(100, 0))
+                .fit()
+                .into(
+                    integranteRutaViewHolder.vistaTarjetaIntegranteRuta.imagen_integrante_ruta
+                )
     }
 
-    override fun getItemCount() = modeloVistaRutaIniciada.listaIntegrantesRuta.value?.size ?: 0
+    override fun getItemCount(): Int {
+        val count = modeloVistaRutaIniciada.listaIntegrantesRuta.value?.size ?: 0
+        return count
+    }
 }

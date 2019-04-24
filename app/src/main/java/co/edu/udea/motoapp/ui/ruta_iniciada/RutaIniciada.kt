@@ -33,11 +33,12 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
 
     private lateinit var mapaRutaGoogle: GoogleMap
     private lateinit var modeloVistaRutaIniciada: ModeloVistaRutaIniciada
-    private var adaptadorIntegranteRuta: AdaptadorIntegranteRuta? = null
+    private lateinit var adaptadorIntegranteRuta: AdaptadorIntegranteRuta
+    private val observadorListaMoteroIntegrantesRuta = Observer<HashMap<String, Motero>> { listaAmigos ->
+            adaptadorIntegranteRuta.notifyDataSetChanged()
+    }
     private val observadorListaIntegrantesRuta = Observer<HashMap<String, IntegranteRuta>> { listaAmigos ->
-        listaAmigos?.let {
-            adaptadorIntegranteRuta?.notifyDataSetChanged()
-        }
+            adaptadorIntegranteRuta.notifyDataSetChanged()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -50,10 +51,6 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
             modeloVistaRutaIniciada =
                 ViewModelProviders.of(actividadRutaIniciada).get(ModeloVistaRutaIniciada::class.java)
             modeloVistaRutaIniciada.rutaActual.value?.let {
-                modeloVistaRutaIniciada.listaIntegrantesRuta.observe(
-                    actividadRutaIniciada,
-                    observadorListaIntegrantesRuta
-                )
                 actividadRutaIniciada.title = getString(R.string.titulo_actividad_ruta_iniciada, it.nombre)
                 texto_descripcion_ruta.text = it.descripcion
                 Picasso.get()
@@ -134,9 +131,17 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
     private fun mostrarDialogoEstadoRuta(dialogoEstadoRuta: AlertDialog) {
         dialogoEstadoRuta.show()
         adaptadorIntegranteRuta = AdaptadorIntegranteRuta(activity!!)
+        modeloVistaRutaIniciada.listaMoterosIntegrantesRuta.observe(
+            activity!!,
+            observadorListaMoteroIntegrantesRuta
+        )
+        modeloVistaRutaIniciada.listaIntegrantesRuta.observe(
+            activity!!,
+            observadorListaIntegrantesRuta
+        )
         dialogoEstadoRuta.indicador_cargando_ruta.animate()
         dialogoEstadoRuta.texto_mensaje_estado_ruta.text = getString(R.string.estado_ruta_mensaje_espera)
+        dialogoEstadoRuta.lista_integrantes_ruta.layoutManager = LinearLayoutManager(activity!!)
         dialogoEstadoRuta.lista_integrantes_ruta.adapter = adaptadorIntegranteRuta
-        dialogoEstadoRuta.lista_integrantes_ruta.layoutManager = LinearLayoutManager(activity)
     }
 }

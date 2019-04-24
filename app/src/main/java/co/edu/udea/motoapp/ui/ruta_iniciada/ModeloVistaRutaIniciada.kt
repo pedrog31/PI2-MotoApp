@@ -11,8 +11,8 @@ import com.google.firebase.database.*
 
 class ModeloVistaRutaIniciada : ViewModel() {
 
-    val listaIntegrantesRuta = MutableLiveData<HashMap<String, IntegranteRuta>>()
-    val listaMoterosIntegrantesRuta = MutableLiveData<HashMap<String, Motero>>()
+    val listaIntegrantesRuta = MutableLiveData<LinkedHashMap<String, IntegranteRuta>>()
+    val listaMoterosIntegrantesRuta = MutableLiveData<LinkedHashMap<String, Motero>>()
     val keyRutaActual = MutableLiveData<String>()
     val rutaActual = MutableLiveData<RutaPrivada>()
     val repositorioRutaPrivada = FirebaseDatabase.getInstance().reference
@@ -73,7 +73,8 @@ class ModeloVistaRutaIniciada : ViewModel() {
     }
 
     fun buscarIntegrantesRuta() {
-        listaIntegrantesRuta.value = hashMapOf()
+        listaIntegrantesRuta.value = linkedMapOf()
+        listaMoterosIntegrantesRuta.value = linkedMapOf()
         keyRutaActual.value?.let {
             repositorioRutaPrivada
                 .child("rutasPrivadas/$it/integrantes")
