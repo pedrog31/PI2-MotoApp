@@ -56,7 +56,7 @@ class MapaRutasPublicas : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(mapaRutasPublicasGoogle: GoogleMap) {
         mapaRutasPublicas = mapaRutasPublicasGoogle
-        mapaRutasPublicasGoogle.setOnMarkerClickListener { marcador ->
+        mapaRutasPublicasGoogle.setOnMarkerClickListener { _ ->
             true
         }
         val sydney = LatLng(-34.0, 151.0)

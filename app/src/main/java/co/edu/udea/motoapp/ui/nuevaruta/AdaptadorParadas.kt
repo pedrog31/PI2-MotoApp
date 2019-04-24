@@ -44,7 +44,6 @@ class AdaptadorParadas: RecyclerView.Adapter<AdaptadorParadas.ParadaViewHolder>(
     inner class ParadaViewHolder(val vistaTarjetaParada: View) : RecyclerView.ViewHolder(vistaTarjetaParada){
         val itemParada = vistaTarjetaParada.findViewById(R.id.textView_parada_item) as TextView
         fun bind(parada:ParadaRuta, context: Context) {
-            Log.d("va a escribir:", parada.nombre)
             itemParada.text = parada.nombre
             vistaTarjetaParada.boton_eliminar_parada.setOnClickListener(View.OnClickListener {
                 paradas.remove(parada)

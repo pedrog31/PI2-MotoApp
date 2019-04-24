@@ -151,7 +151,7 @@ class NuevaRuta : Fragment() {
             val ruta = RutaPrivada(
                 descripcion_ruta.text.toString(),0,
                 0,
-                hint_spinner.selectedItem as String,
+                hint_spinner.selectedItem.toString(),
                 nombre_ruta.text.toString(),
                 "", breakpoints,
                 0.0F,
