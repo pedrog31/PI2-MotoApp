@@ -31,12 +31,11 @@ class AdaptadorAmigos(private val mapAmigosMoteros: HashMap<String, Motero>,
 
     override fun onBindViewHolder(holder: AmigoViewHolder, posicion: Int) {
         val amigoMotero = amigosMoteros.elementAt(posicion)
-        val recursos = this.contexto.resources
         holder.vistaTarjetaAmigoCheckbox.checkBox_amigo.text =  amigoMotero.nombre
         if(amigosList.contains(keysAmigosMoteros.elementAt(posicion))){
             holder.vistaTarjetaAmigoCheckbox.checkBox_amigo.toggle()
         }
-        holder.vistaTarjetaAmigoCheckbox.checkBox_amigo.setOnCheckedChangeListener { buttonView, isChecked ->
+        holder.vistaTarjetaAmigoCheckbox.checkBox_amigo.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
                 val readWriteMap = hashMapOf("inicioRuta" to false, "latitud" to 0, "longitud" to 0)
                 amigosList.put(keysAmigosMoteros.elementAt(posicion),readWriteMap)
