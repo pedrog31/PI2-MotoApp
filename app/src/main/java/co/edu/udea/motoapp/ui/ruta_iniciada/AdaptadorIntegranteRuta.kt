@@ -25,19 +25,28 @@ class AdaptadorIntegranteRuta(private val contexto: FragmentActivity):
     }
 
     override fun onBindViewHolder(integranteRutaViewHolder: IntegranteRutaViewHolder, position: Int) {
-        val IntegranteRutaKey = modeloVistaRutaIniciada.listaIntegrantesRuta.value?.keys?.elementAt(position)
-        val moteroIntegranteRuta = modeloVistaRutaIniciada.listaMoterosIntegrantesRuta.value?.get(IntegranteRutaKey)
-        integranteRutaViewHolder.vistaTarjetaIntegranteRuta.texto_nombre_integrante_ruta.text = moteroIntegranteRuta?.nombre
-
-        if(moteroIntegranteRuta?.urlFoto != "null")
+        val IntegranteRutaKey = modeloVistaRutaIniciada.listaIntegrantesRuta.value?.keys?.elementAt(position) ?: return
+        val moteroIntegranteRuta = modeloVistaRutaIniciada.listaMoterosIntegrantesRuta.value?.get(IntegranteRutaKey) ?: return
+        val integranteRuta = modeloVistaRutaIniciada.listaIntegrantesRuta.value?.get(IntegranteRutaKey) ?: return
+        integranteRutaViewHolder.vistaTarjetaIntegranteRuta.texto_nombre_integrante_ruta.text = moteroIntegranteRuta.nombre
+        if(moteroIntegranteRuta.urlFoto != "null")
             Picasso.get()
-                .load(moteroIntegranteRuta?.urlFoto)
+                .load(moteroIntegranteRuta.urlFoto)
                 .centerCrop()
                 .transform(TransformacionImagen(100, 0))
                 .fit()
                 .into(
                     integranteRutaViewHolder.vistaTarjetaIntegranteRuta.imagen_integrante_ruta
                 )
+        integranteRutaViewHolder.vistaTarjetaIntegranteRuta.boton_eliminar_integrante_ruta.setOnClickListener {
+            modeloVistaRutaIniciada.eliminarIntegranteRuta(contexto, IntegranteRutaKey)
+        }
+        if(modeloVistaRutaIniciada.rutaActual!!.esPropietario())
+            integranteRutaViewHolder.vistaTarjetaIntegranteRuta.boton_eliminar_integrante_ruta.visibility = View.VISIBLE
+        if(integranteRuta.inicioRuta) {
+            integranteRutaViewHolder.vistaTarjetaIntegranteRuta.boton_eliminar_integrante_ruta.visibility = View.GONE
+            integranteRutaViewHolder.vistaTarjetaIntegranteRuta.imagen_integrante_iniciado.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {

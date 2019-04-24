@@ -2,6 +2,7 @@ package co.edu.udea.motoapp.ui.ruta_iniciada
 
 import android.content.Context
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.edu.udea.motoapp.modelo.IntegranteRuta
@@ -13,8 +14,8 @@ class ModeloVistaRutaIniciada : ViewModel() {
 
     val listaIntegrantesRuta = MutableLiveData<LinkedHashMap<String, IntegranteRuta>>()
     val listaMoterosIntegrantesRuta = MutableLiveData<LinkedHashMap<String, Motero>>()
-    val keyRutaActual = MutableLiveData<String>()
-    val rutaActual = MutableLiveData<RutaPrivada>()
+    var keyRutaActual: String? = null
+    var rutaActual: RutaPrivada? = null
     val repositorioRutaPrivada = FirebaseDatabase.getInstance().reference
 
     val escuchadorIntegrantesRutas = object : ChildEventListener {
@@ -61,7 +62,7 @@ class ModeloVistaRutaIniciada : ViewModel() {
     }
 
     fun eliminarRuta(context: Context) {
-        keyRutaActual.value?.let {
+        keyRutaActual?.let {
             repositorioRutaPrivada.child("rutasPrivadas/$it").removeValue()
                 .addOnSuccessListener {
                     mostrarMensaje(context, "Ruta eliminada correctamente")
@@ -75,14 +76,32 @@ class ModeloVistaRutaIniciada : ViewModel() {
     fun buscarIntegrantesRuta() {
         listaIntegrantesRuta.value = linkedMapOf()
         listaMoterosIntegrantesRuta.value = linkedMapOf()
-        keyRutaActual.value?.let {
+        keyRutaActual?.let {
             repositorioRutaPrivada
                 .child("rutasPrivadas/$it/integrantes")
                 .addChildEventListener(escuchadorIntegrantesRutas)
         }
     }
 
+    fun eliminarIntegranteRuta(contexto: FragmentActivity, integranteRutaKey: String) {
+        repositorioRutaPrivada
+            .child("rutasPrivadas/${keyRutaActual}/integrantes/$integranteRutaKey")
+            .removeValue()
+            .addOnSuccessListener {
+                listaMoterosIntegrantesRuta.value?.remove(integranteRutaKey)
+                listaIntegrantesRuta.value?.remove(integranteRutaKey)
+                listaIntegrantesRuta.value = listaIntegrantesRuta.value
+                mostrarMensaje(contexto, "Integrante eliminado correctamente")
+            }.addOnFailureListener {
+                mostrarMensaje(contexto, "Error eliminando integrante :(")
+            }
+    }
+
     private fun mostrarMensaje(context: Context, mensaje: String) {
         Toast.makeText(context, mensaje, Toast.LENGTH_LONG).show()
+    }
+
+    fun iniciarRuta(contexto: Context) {
+
     }
 }

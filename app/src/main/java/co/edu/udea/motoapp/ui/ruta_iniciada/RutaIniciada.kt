@@ -34,10 +34,10 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
     private lateinit var mapaRutaGoogle: GoogleMap
     private lateinit var modeloVistaRutaIniciada: ModeloVistaRutaIniciada
     private lateinit var adaptadorIntegranteRuta: AdaptadorIntegranteRuta
-    private val observadorListaMoteroIntegrantesRuta = Observer<HashMap<String, Motero>> { listaAmigos ->
+    private val observadorListaMoteroIntegrantesRuta = Observer<HashMap<String, Motero>> { _ ->
             adaptadorIntegranteRuta.notifyDataSetChanged()
     }
-    private val observadorListaIntegrantesRuta = Observer<HashMap<String, IntegranteRuta>> { listaAmigos ->
+    private val observadorListaIntegrantesRuta = Observer<HashMap<String, IntegranteRuta>> { _ ->
             adaptadorIntegranteRuta.notifyDataSetChanged()
     }
 
@@ -50,7 +50,7 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
         activity?.let { actividadRutaIniciada ->
             modeloVistaRutaIniciada =
                 ViewModelProviders.of(actividadRutaIniciada).get(ModeloVistaRutaIniciada::class.java)
-            modeloVistaRutaIniciada.rutaActual.value?.let {
+            modeloVistaRutaIniciada.rutaActual?.let {
                 actividadRutaIniciada.title = getString(R.string.titulo_actividad_ruta_iniciada, it.nombre)
                 texto_descripcion_ruta.text = it.descripcion
                 Picasso.get()
@@ -66,7 +66,7 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
                     )
                 }
                 boton_iniciar_ruta.setOnClickListener {
-                    iniciarRuta()
+                    alertarIntegrantesInicioRuta()
                 }
                 boton_eliminar_ruta.setOnClickListener {
                     modeloVistaRutaIniciada.eliminarRuta(this@RutaIniciada.requireContext())
@@ -97,7 +97,7 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
     }
 
     private fun anadirMarcadoresParadas() {
-        val listaParadas = modeloVistaRutaIniciada.rutaActual.value?.paradas ?: return
+        val listaParadas = modeloVistaRutaIniciada.rutaActual?.paradas ?: return
         mapaRutaGoogle.animateCamera(
             CameraUpdateFactory.newLatLngZoom(LatLng(listaParadas[0].latitud, listaParadas[0].longitud), 6F)
         )
@@ -117,12 +117,16 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun iniciarRuta() {
+    private fun alertarIntegrantesInicioRuta() {
         modeloVistaRutaIniciada.buscarIntegrantesRuta()
         this.mostrarDialogoEstadoRuta(
             AlertDialog
                 .Builder(this.requireContext())
                 .setView(R.layout.tarjeta_estado_integrantes_ruta)
+                .setCancelable(false)
+                .setPositiveButton(R.string.boton_iniciar_ruta, { _, _ ->
+                    modeloVistaRutaIniciada.iniciarRuta(requireContext())
+                })
                 .setNegativeButton(android.R.string.cancel, null)
                 .create()
         )
@@ -130,6 +134,7 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
 
     private fun mostrarDialogoEstadoRuta(dialogoEstadoRuta: AlertDialog) {
         dialogoEstadoRuta.show()
+        if (modeloVistaRutaIniciada.rutaActual == null) return
         adaptadorIntegranteRuta = AdaptadorIntegranteRuta(activity!!)
         modeloVistaRutaIniciada.listaMoterosIntegrantesRuta.observe(
             activity!!,
