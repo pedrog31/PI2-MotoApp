@@ -11,7 +11,7 @@ class RutaPrivada (
     calificacion: Float,
     numeroCalificaciones: Int,
     val propietario: String,
-    val participantes: HashMap<String, Boolean>): Ruta(
+    val participantes: HashMap<String, HashMap<String,Any>>): Ruta(
         descripcion = descripcion,
         distancia = distancia,
         experiencia = experiencia,

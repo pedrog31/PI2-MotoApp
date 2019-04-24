@@ -6,7 +6,7 @@ open class Ruta(
     val experiencia: Int,
     val nivelDificultad: String,
     val nombre: String,
-    val urlFoto: String,
+    var urlFoto: String,
     val paradas: MutableList<ParadaRuta>,
     val calificacion: Float,
     val numeroCalificaciones: Int) {
