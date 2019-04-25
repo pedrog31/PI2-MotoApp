@@ -1,6 +1,7 @@
 package co.edu.udea.motoapp.modelo
 
 import android.os.Parcelable
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
@@ -17,7 +18,7 @@ class RutaPrivada (
     override val numeroCalificaciones: Int,
     val propietario: String,
     val participantes: @RawValue HashMap<String, HashMap<String,Any>>):Parcelable, Ruta(
-        descripcion = descripcion,
+         descripcion = descripcion,
         distancia = distancia,
         experiencia = experiencia,
         nivelDificultad = nivelDificultad,
@@ -42,4 +43,8 @@ class RutaPrivada (
     )
 
     constructor() :this(Ruta(), "")
+
+    fun esPropietario() : Boolean {
+        return propietario == FirebaseAuth.getInstance().uid
+    }
 }

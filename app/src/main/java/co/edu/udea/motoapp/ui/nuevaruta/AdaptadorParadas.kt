@@ -13,6 +13,7 @@ import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.modelo.ParadaRuta
 import co.edu.udea.motoapp.ui.lista_amigos.AdaptadorAmigo
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.tarjeta_parada_agregada.view.*
 
 class AdaptadorParadas: RecyclerView.Adapter<AdaptadorParadas.ParadaViewHolder>(){
@@ -49,6 +50,8 @@ class AdaptadorParadas: RecyclerView.Adapter<AdaptadorParadas.ParadaViewHolder>(
                 paradas.remove(parada)
                 notifyDataSetChanged()
             })
+
+
         }
 
     }

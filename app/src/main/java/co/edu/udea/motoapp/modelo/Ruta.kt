@@ -15,7 +15,6 @@ open class Ruta(
     open val paradas: @RawValue MutableList<ParadaRuta>,
     open val calificacion: Float,
     open val numeroCalificaciones: Int): Parcelable {
-
     constructor() : this(
         "",
         0,
