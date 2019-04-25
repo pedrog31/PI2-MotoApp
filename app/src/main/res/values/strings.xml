@@ -63,4 +63,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo_actividad_ruta_iniciada">MotoApp: %1$s</string>
+    <string name="imagen_ruta">Imagen principal de la ruta</string>
+    <string name="boton_mapa_ruta_mostrar">Mostrar mapa</string>
+    <string name="boton_mapa_ruta_ocultar">Ocultar mapa</string>
+    <string name="boton_iniciar_ruta">Iniciar ruta</string>
+    <string name="boton_eliminar_ruta">Eliminar ruta</string>
+    <string name="estado_ruta_mensaje_espera">Debes esperar a que los integrantes de la ruta inicien el viaje</string>
 </resources>

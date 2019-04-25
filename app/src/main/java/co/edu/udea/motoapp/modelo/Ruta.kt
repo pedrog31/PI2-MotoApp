@@ -1,16 +1,20 @@
 package co.edu.udea.motoapp.modelo
 
-open class Ruta(
-    val descripcion: String,
-    val distancia: Int,
-    val experiencia: Int,
-    val nivelDificultad: String,
-    val nombre: String,
-    var urlFoto: String,
-    val paradas: MutableList<ParadaRuta>,
-    val calificacion: Float,
-    val numeroCalificaciones: Int) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
+@Parcelize
+open class Ruta(
+    open val descripcion: String,
+    open val distancia: Int,
+    open val experiencia: Int,
+    open val nivelDificultad: String,
+    open val nombre: String,
+    open var urlFoto: String,
+    open val paradas: @RawValue MutableList<ParadaRuta>,
+    open val calificacion: Float,
+    open val numeroCalificaciones: Int): Parcelable {
     constructor() : this(
         "",
         0,

@@ -35,7 +35,7 @@ class AdaptadorAmigo(
     override fun onBindViewHolder(amigoViewHolder: AmigoViewHolder, posicion: Int) {
         val amigoMotero = amigosMoteros.elementAt(posicion)
         val recursos = this.contexto.resources
-        amigoViewHolder.vistaTarjetaMotero.texto_nombre_amigo.text =  recursos.getString(R.string.amigo_nombre, amigoMotero.nombre)
+        amigoViewHolder.vistaTarjetaMotero.texto_nombre_integrante_ruta.text =  recursos.getString(R.string.amigo_nombre, amigoMotero.nombre)
         amigoViewHolder.vistaTarjetaMotero.texto_celular_amigo.text = recursos.getString(R.string.amigo_celular, amigoMotero.celular)
         amigoViewHolder.vistaTarjetaMotero.texto_correo_amigo.text = recursos.getString(R.string.amigo_correo, amigoMotero.correo)
         amigoViewHolder.vistaTarjetaMotero.texto_ciudad_amigo.text = recursos.getString(R.string.amigo_ciudad, amigoMotero.ciudad)
@@ -45,7 +45,7 @@ class AdaptadorAmigo(
                 .centerCrop()
                 .transform(TransformacionImagen(100, 0))
                 .fit()
-                .into(amigoViewHolder.vistaTarjetaMotero.imagen_amigo)
+                .into(amigoViewHolder.vistaTarjetaMotero.imagen_integrante_ruta)
         if (tipo == recursos.getString(R.string.tipo_solicitud)) {
             amigoViewHolder.vistaTarjetaMotero.boton_agregar_amigo.visibility = View.VISIBLE
             amigoViewHolder.vistaTarjetaMotero.boton_agregar_amigo.setOnClickListener {

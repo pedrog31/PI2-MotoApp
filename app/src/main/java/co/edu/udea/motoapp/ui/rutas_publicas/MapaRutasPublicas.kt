@@ -56,10 +56,12 @@ class MapaRutasPublicas : Fragment(), OnMapReadyCallback {
             crearDialogoRutaSeleccionada(marcador)
             true
         }
-        proveedorUbicacion.lastLocation.addOnSuccessListener {
-            mapaRutasPublicas.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 12F)
-            )
+        proveedorUbicacion.lastLocation.addOnSuccessListener {ubicacion ->
+            ubicacion?.let {
+                mapaRutasPublicas.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 12F)
+                )
+            }
         }
         modeloVistaRutasPublicas.buscarRutas()
     }
