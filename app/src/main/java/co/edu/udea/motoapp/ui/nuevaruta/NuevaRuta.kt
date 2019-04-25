@@ -137,7 +137,7 @@ class NuevaRuta : Fragment() {
             amigosRecyclerView.layoutManager = LinearLayoutManager(this.context)
             amigosRecyclerView.adapter = adaptador
             if(adaptador.itemCount==0){
-                textView_sin_amigos.visibility=View.VISIBLE
+                dialogView.textView_sin_amigos.visibility=View.VISIBLE
             }
             dialogView.boton_invita_amigos.setOnClickListener{
                 alert.dismiss()
