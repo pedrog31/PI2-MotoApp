@@ -17,7 +17,7 @@ class RutaPrivada (
     override val calificacion: Float,
     override val numeroCalificaciones: Int,
     val propietario: String,
-    val participantes: @RawValue HashMap<String, HashMap<String,Any>>):Parcelable, Ruta(
+    val integrantes: @RawValue HashMap<String, HashMap<String,Any>>):Parcelable, Ruta(
          descripcion = descripcion,
         distancia = distancia,
         experiencia = experiencia,

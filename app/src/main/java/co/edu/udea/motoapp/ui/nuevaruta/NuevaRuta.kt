@@ -27,6 +27,7 @@ import co.edu.udea.motoapp.excepcion.ExcepcionAutenticacion
 import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.modelo.ParadaRuta
 import co.edu.udea.motoapp.modelo.RutaPrivada
+import co.edu.udea.motoapp.servicios.MyFirebaseMessagingService
 import co.edu.udea.motoapp.ui.lista_amigos.ModeloVistaAmigos
 import co.edu.udea.motoapp.util.TransformacionImagen
 import com.google.android.gms.tasks.Continuation
@@ -39,14 +40,25 @@ import com.jaiselrahman.hintspinner.HintSpinnerAdapter
 import com.seatgeek.placesautocomplete.OnPlaceSelectedListener
 import com.seatgeek.placesautocomplete.model.Place
 import com.squareup.picasso.Picasso
+import com.trenzlr.firebasenotificationhelper.FirebaseNotiCallBack
+import com.trenzlr.firebasenotificationhelper.FirebaseNotificationHelper
 import kotlinx.android.synthetic.main.alert_dialog_amigos.*
 import kotlinx.android.synthetic.main.alert_dialog_amigos.view.*
 import kotlinx.android.synthetic.main.fragmento_nueva_ruta.*
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.HashMap
 
 
-class NuevaRuta : Fragment() {
+class NuevaRuta : Fragment(), FirebaseNotiCallBack {
+    override fun fail(p0: String?) {
+        Log.d("error", p0)
+    }
+
+    override fun success(p0: String?) {
+        Log.d("success", p0)
+    }
 
     private val PERMISSION_CODE = 1001
     val IMAGE_PICK_CODE = 1000
@@ -87,11 +99,14 @@ class NuevaRuta : Fragment() {
         return inflater.inflate(R.layout.fragmento_nueva_ruta, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         geocoder= Geocoder(context, Locale.getDefault())
         setUpRecyclerView()
         setupAmigosAdapter()
+        val mf = MyFirebaseMessagingService()
+        mf.grabFcmToken()
 
         var s=mutableListOf<String>("Fácil","Intermedio","Difícil")
         hint_spinner.tag="nj"
@@ -101,7 +116,6 @@ class NuevaRuta : Fragment() {
         boton_agregar_parada.setOnClickListener{
             this.agregarParada()
         }
-
         boton_imagen_ruta.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if (ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) ==
@@ -137,7 +151,7 @@ class NuevaRuta : Fragment() {
             amigosRecyclerView.layoutManager = LinearLayoutManager(this.context)
             amigosRecyclerView.adapter = adaptador
             if(adaptador.itemCount==0){
-                textView_sin_amigos.visibility=View.VISIBLE
+                dialogView.textView_sin_amigos.visibility=View.VISIBLE
             }
             dialogView.boton_invita_amigos.setOnClickListener{
                 alert.dismiss()
@@ -150,7 +164,8 @@ class NuevaRuta : Fragment() {
             breakpoints.addAll(breakpointsParadas)
             breakpoints.add(final)
             val ruta = RutaPrivada(
-                descripcion_ruta.text.toString(),calcularDistancia(breakpoints),
+                descripcion_ruta.text.toString(),
+                calcularDistancia(breakpoints),
                 0,
                 hint_spinner.selectedItem.toString(),
                 nombre_ruta.text.toString(),
@@ -165,6 +180,7 @@ class NuevaRuta : Fragment() {
             }else{
                 agregarRuta(ruta)
             }
+
         }
 
         places_autocomplete.setOnPlaceSelectedListener(
