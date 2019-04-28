@@ -7,9 +7,10 @@ class Motero(
     val ciudad: String,
     val urlFoto: String,
     val amigos: HashMap<String, Boolean>,
-    val retos: MutableList<String>) {
+    val retos: MutableList<String>,
+    val fcmToken: String) {
 
-    constructor() : this("", "", "", "", "", hashMapOf(), mutableListOf()) {
+    constructor() : this("", "", "", "", "", hashMapOf(), mutableListOf(), "") {
 
     }
 

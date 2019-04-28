@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import co.edu.udea.motoapp.R
 import co.edu.udea.motoapp.excepcion.ExcepcionAutenticacion
+import co.edu.udea.motoapp.servicios.MyFirebaseMessagingService
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 class Autenticacion : Activity() {
     private val CODIGO_VALIDACION = 0
+    val messagingService = MyFirebaseMessagingService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,7 @@ class Autenticacion : Activity() {
         if (esNuevoMotero > -10 && esNuevoMotero < 10)
             iniciarActividad(Registro::class.java)
         else
+            messagingService.grabFcmToken()
             iniciarActividad(Principal::class.java)
     }
 

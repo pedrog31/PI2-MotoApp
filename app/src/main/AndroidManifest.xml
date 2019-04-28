@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
             android:name=".MotoApp"
@@ -19,6 +20,17 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
+        <service
+                android:exported="false"
+                android:name=".servicios.MyFirebaseMessagingService"
+                android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
         <activity android:name=".actividad.RutaIniciada">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
