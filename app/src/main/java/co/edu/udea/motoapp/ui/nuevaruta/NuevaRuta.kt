@@ -51,14 +51,8 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class NuevaRuta : Fragment(), FirebaseNotiCallBack {
-    override fun fail(p0: String?) {
-        Log.d("error", p0)
-    }
+class NuevaRuta : Fragment() {
 
-    override fun success(p0: String?) {
-        Log.d("success", p0)
-    }
 
     private val PERMISSION_CODE = 1001
     val IMAGE_PICK_CODE = 1000
@@ -173,7 +167,7 @@ class NuevaRuta : Fragment(), FirebaseNotiCallBack {
                 0.0F,
                 0,
                 moteroActual.uid,
-                amigos
+                hashMapOf()
             )
             if(::filePath.isInitialized){
                 agregarRutaFoto(ruta)
@@ -181,6 +175,7 @@ class NuevaRuta : Fragment(), FirebaseNotiCallBack {
                 agregarRuta(ruta)
             }
 
+            this.activity?.finish()
         }
 
         places_autocomplete.setOnPlaceSelectedListener(
@@ -328,7 +323,7 @@ class NuevaRuta : Fragment(), FirebaseNotiCallBack {
             if (task.isSuccessful) {
                 urlFoto= task.result.toString()
                 rutaPvda.urlFoto=urlFoto
-                agregarRuta(rutaPvda)
+                val key = agregarRuta(rutaPvda)
 
             } else {
                 // Handle failures
@@ -346,7 +341,7 @@ class NuevaRuta : Fragment(), FirebaseNotiCallBack {
         }
     }
 
-    fun agregarRuta(rutaPrivada: RutaPrivada){
+    fun agregarRuta(rutaPrivada: RutaPrivada) {
         val ruta =rutaPrivada
         val key = repositorioRutasPrivadas.push().getKey()
 
@@ -355,13 +350,21 @@ class NuevaRuta : Fragment(), FirebaseNotiCallBack {
                 ruta
             )
             .addOnSuccessListener {
-                repositorioRutasPrivadas.child("moteros").child(moteroActual.uid).child("rutas").child(key.toString()).setValue("true")
-                this.activity?.finish()
+                repositorioRutasPrivadas.child("moteros").child(moteroActual.uid).child("rutas").child(key.toString()).setValue(true)
+
+                for(i in amigos) {
+                    repositorioRutasPrivadas.child("moteros").child(i.key).child("invitacionRuta").child(key.toString())
+                        .setValue("false")
+                        .addOnSuccessListener { }
+                        .addOnFailureListener { }
+                }
             }
             .addOnFailureListener {
             }
-    }
 
+
+
+    }
 
 
 

@@ -21,7 +21,8 @@ class ModeloVistaRegistro : ViewModel() {
             this.repositorioMoteros
                 .child(moteroActual.uid)
                 .setValue(
-                    Motero(nombre, correo, celular,  ciudad, moteroActual.photoUrl.toString(), hashMapOf(), mutableListOf(), ""))
+                    Motero(nombre, correo, celular,  ciudad, moteroActual.photoUrl.toString(), hashMapOf(), mutableListOf(), "",
+                        hashMapOf()))
                 .addOnSuccessListener {
                     estadoRegistro.value = "ok"
                     messagingService.grabFcmToken()
