@@ -66,8 +66,29 @@
                     app:layout_constraintTop_toBottomOf="@+id/texto_descripcion_ruta"
                     app:layout_constraintEnd_toStartOf="@+id/boton_eliminar_ruta" android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"
-                    app:layout_constraintVertical_bias="0.0"/>
+                    app:layout_constraintVertical_bias="0.0" android:visibility="gone"/>
 
+            <Button
+                    android:id="@+id/boton_iniciar_ruta_invitado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:gravity="start|center_vertical"
+                    android:layout_margin="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/boton_iniciar_ruta_invitado"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/texto_descripcion_ruta"
+                    app:layout_constraintEnd_toStartOf="@+id/boton_eliminar_ruta" android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"
+                    app:layout_constraintVertical_bias="0.0" android:visibility="gone"/>
             <Button
                     android:id="@+id/boton_eliminar_ruta"
                     android:layout_width="wrap_content"
@@ -88,7 +109,30 @@
                     app:layout_constraintTop_toBottomOf="@+id/texto_descripcion_ruta"
                     android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@+id/boton_iniciar_ruta"
                     android:layout_marginStart="16dp" app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="16dp" app:layout_constraintVertical_bias="0.0"/>
+                    android:layout_marginBottom="16dp" app:layout_constraintVertical_bias="0.0"
+                    android:visibility="gone"/>
+            <Button
+                    android:id="@+id/boton_eliminar_ruta_invitado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:textColor="@android:color/white"
+                    android:gravity="start|center_vertical"
+                    android:layout_margin="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/boton_eliminar_ruta"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/texto_descripcion_ruta"
+                    android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@+id/boton_iniciar_ruta"
+                    android:layout_marginStart="16dp" app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp" app:layout_constraintVertical_bias="0.0"
+                    android:visibility="gone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.github.aakira.expandablelayout.ExpandableWeightLayout>
 

@@ -1,23 +1,16 @@
 package co.edu.udea.motoapp.ui.rutas_privadas
 
 import android.content.Intent
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.actividad.MapaRutasPublicas
 import co.edu.udea.motoapp.actividad.RutaIniciada
 import co.edu.udea.motoapp.modelo.RutaPrivada
 import co.edu.udea.motoapp.util.TransformacionImagen
-import com.firebase.ui.auth.AuthUI
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
@@ -34,14 +27,13 @@ class AdaptadorRuta (
     inner class RutaViewHolder(val vistaTarjetaRuta: View) : RecyclerView.ViewHolder(vistaTarjetaRuta)
     private val keysRutasPrivadas: MutableSet<String> = mapRutasPrivadas.keys
     private val rutasPrivadas: MutableCollection<RutaPrivada> = mapRutasPrivadas.values
-    private val modeloVistaListaRutasPrivadas = ViewModelProviders.of(contexto).get(ModeloVistaListaRutasPrivadas::class.java)
     val moteroId = FirebaseAuth.getInstance().uid
 
 
     val repositorioInvitacionRutas = FirebaseDatabase.getInstance().reference
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RutaViewHolder {
-        var view: View
+        val view: View
         when(tipo){
             0->view=LayoutInflater.from(parent.context).inflate(R.layout.tarjeta_invitacion_ruta, parent, false)
             1->view=LayoutInflater.from(parent.context).inflate(R.layout.tarjeta_ruta_privada, parent, false)
@@ -57,7 +49,7 @@ class AdaptadorRuta (
         when(tipo){
             0->{
                 rutaViewHolder.vistaTarjetaRuta.texto_nombre_invitacion_ruta.text = rutaPrivada.nombre
-                rutaViewHolder.vistaTarjetaRuta.texto_estado_invitacion_ruta.text =  recursos.getString(R.string.texto_estado_ruta_privada)
+                rutaViewHolder.vistaTarjetaRuta.texto_estado_invitacion_ruta.text =  recursos.getString(R.string.texto_estado_ruta_privada, rutaPrivada.estado)
                 if (rutaPrivada.urlFoto != "" && rutaPrivada.urlFoto != "null")
                     Picasso.get()
                         .load(rutaPrivada.urlFoto)
@@ -97,20 +89,16 @@ class AdaptadorRuta (
                 rutaViewHolder.vistaTarjetaRuta.boton_rechazar_ruta.setOnClickListener {
                     repositorioInvitacionRutas.child("moteros/$moteroId/invitacionRuta/$keyRutaPrivada").removeValue()
                     mapRutasPrivadas.remove(keyRutaPrivada)
-                    if(mapRutasPrivadas.size==0){
-                        rutaViewHolder.vistaTarjetaRuta.textView_invitacion_rutas.visibility=View.GONE
-                    }
                     notifyDataSetChanged()
                 }
             }
             1->{
-                rutaViewHolder.vistaTarjetaRuta.textView_rutas_propias.visibility=View.VISIBLE
                 rutaViewHolder.vistaTarjetaRuta.texto_nombre_ruta_privada.text =  rutaPrivada.nombre
                 rutaViewHolder.vistaTarjetaRuta.texto_dificultad_ruta_privada.text =  recursos.getString(R.string.dificultad_ruta, rutaPrivada.nivelDificultad)
                 rutaViewHolder.vistaTarjetaRuta.texto_experiencia_ruta_privada.text =  recursos.getString(R.string.experiencia_ruta, rutaPrivada.experiencia)
                 rutaViewHolder.vistaTarjetaRuta.texto_distancia_ruta_privada.text =  recursos.getString(R.string.distancia_ruta, rutaPrivada.distancia)
                 rutaViewHolder.vistaTarjetaRuta.texto_calificacion_ruta_privada.text =  recursos.getString(R.string.calificacion_ruta, String.format("%.02f", rutaPrivada.calificacion))
-                rutaViewHolder.vistaTarjetaRuta.texto_estado_ruta_privada.text =  recursos.getString(R.string.texto_estado_ruta_privada)
+                rutaViewHolder.vistaTarjetaRuta.texto_estado_ruta_privada.text =  recursos.getString(R.string.texto_estado_ruta_privada, rutaPrivada.estado)
                 if (rutaPrivada.urlFoto != "" && rutaPrivada.urlFoto != "null")
                     Picasso.get()
                         .load(rutaPrivada.urlFoto)

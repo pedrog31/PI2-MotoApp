@@ -33,13 +33,6 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
 
     private lateinit var mapaRutaGoogle: GoogleMap
     private lateinit var modeloVistaRutaIniciada: ModeloVistaRutaIniciada
-    private lateinit var adaptadorIntegranteRuta: AdaptadorIntegranteRuta
-    private val observadorListaMoteroIntegrantesRuta = Observer<HashMap<String, Motero>> { _ ->
-            adaptadorIntegranteRuta.notifyDataSetChanged()
-    }
-    private val observadorListaIntegrantesRuta = Observer<HashMap<String, IntegranteRuta>> { _ ->
-            adaptadorIntegranteRuta.notifyDataSetChanged()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragmento_ruta_iniciada, container, false)
@@ -51,29 +44,56 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
             modeloVistaRutaIniciada =
                 ViewModelProviders.of(actividadRutaIniciada).get(ModeloVistaRutaIniciada::class.java)
             modeloVistaRutaIniciada.rutaActual?.let {
+                this.manejarAccionesRuta()
                 actividadRutaIniciada.title = getString(R.string.titulo_actividad_ruta_iniciada, it.nombre)
                 texto_descripcion_ruta.text = it.descripcion
-                Picasso.get()
-                    .load(it.urlFoto)
-                    .centerCrop()
-                    .transform(TransformacionImagen(40, 0))
-                    .fit()
-                    .into(imagen_ruta)
-                boton_mapa_ruta.setOnClickListener {
-                    mostrarMapaRuta()
-                    (childFragmentManager.findFragmentById(R.id.mapa_rutas_privadas) as? SupportMapFragment)?.getMapAsync(
-                        this
-                    )
-                }
-                boton_iniciar_ruta.setOnClickListener {
-                    alertarIntegrantesInicioRuta()
-                }
-                boton_eliminar_ruta.setOnClickListener {
-                    modeloVistaRutaIniciada.eliminarRuta(this@RutaIniciada.requireContext())
-                }
+                if (it.urlFoto != "")
+                    Picasso.get()
+                        .load(it.urlFoto)
+                        .centerCrop()
+                        .transform(TransformacionImagen(40, 0))
+                        .fit()
+                        .into(imagen_ruta)
             }
         }
     }
+
+    private fun manejarAccionesRuta() {
+        if (this.modeloVistaRutaIniciada.rutaActual!!.esPropietario()) {
+            boton_iniciar_ruta.visibility = View.VISIBLE
+            boton_eliminar_ruta.visibility = View.VISIBLE
+            boton_iniciar_ruta.setOnClickListener {
+                iniciarRuta()
+            }
+            boton_eliminar_ruta.setOnClickListener {
+                this@RutaIniciada.activity?.let { it1 -> modeloVistaRutaIniciada.eliminarRuta(it1) }
+            }
+        } else {
+            boton_eliminar_ruta_invitado.visibility = View.VISIBLE
+            boton_iniciar_ruta.setOnClickListener {
+                iniciarRutaInvitado()
+            }
+            boton_eliminar_ruta_invitado.setOnClickListener {
+                this@RutaIniciada.activity?.let { it1 -> modeloVistaRutaIniciada.eliminarRutaInvitada(it1) }
+            }
+        }
+        boton_mapa_ruta.setOnClickListener {
+            mostrarMapaRuta()
+            (childFragmentManager.findFragmentById(R.id.mapa_rutas_privadas) as? SupportMapFragment)?.getMapAsync(
+                this
+            )
+        }
+    }
+
+    private fun iniciarRuta() {
+        this.activity?.let { this.modeloVistaRutaIniciada.iniciarRuta(it) }
+
+    }
+
+    private fun iniciarRutaInvitado() {
+
+    }
+
 
     private fun mostrarMapaRuta() {
         boton_mapa_ruta.setOnClickListener { ocultarMapaRuta() }
@@ -115,38 +135,5 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
                     )
             )
         }
-    }
-
-    private fun alertarIntegrantesInicioRuta() {
-        modeloVistaRutaIniciada.buscarIntegrantesRuta()
-        this.mostrarDialogoEstadoRuta(
-            AlertDialog
-                .Builder(this.requireContext())
-                .setView(R.layout.tarjeta_estado_integrantes_ruta)
-                .setCancelable(false)
-                .setPositiveButton(R.string.boton_iniciar_ruta, { _, _ ->
-                    modeloVistaRutaIniciada.iniciarRuta(requireContext())
-                })
-                .setNegativeButton(android.R.string.cancel, null)
-                .create()
-        )
-    }
-
-    private fun mostrarDialogoEstadoRuta(dialogoEstadoRuta: AlertDialog) {
-        dialogoEstadoRuta.show()
-        if (modeloVistaRutaIniciada.rutaActual == null) return
-        adaptadorIntegranteRuta = AdaptadorIntegranteRuta(activity!!)
-        modeloVistaRutaIniciada.listaMoterosIntegrantesRuta.observe(
-            activity!!,
-            observadorListaMoteroIntegrantesRuta
-        )
-        modeloVistaRutaIniciada.listaIntegrantesRuta.observe(
-            activity!!,
-            observadorListaIntegrantesRuta
-        )
-        dialogoEstadoRuta.indicador_cargando_ruta.animate()
-        dialogoEstadoRuta.texto_mensaje_estado_ruta.text = getString(R.string.estado_ruta_mensaje_espera)
-        dialogoEstadoRuta.lista_integrantes_ruta.layoutManager = LinearLayoutManager(activity!!)
-        dialogoEstadoRuta.lista_integrantes_ruta.adapter = adaptadorIntegranteRuta
     }
 }

@@ -1,6 +1,5 @@
 package co.edu.udea.motoapp.ui.rutas_privadas
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.modelo.RutaPrivada
-import co.edu.udea.motoapp.ui.nuevaruta.AdaptadorAmigos
 import kotlinx.android.synthetic.main.fragmento_lista_rutas_privadas.*
 
 
@@ -32,12 +29,14 @@ class ListaRutasPrivadas : Fragment() {
     private val observadorListaRutasPrivadas = Observer<HashMap<String, RutaPrivada>> { listaRutas ->
         listaRutas?.let {
             adaptadorVistaAmigos?.notifyDataSetChanged()
+            resultado_busqueda_rutas_privadas.text = getString(R.string.resultado_busqueda_rutas_privadas, it.size)
         }
     }
 
     private val observadorListaInvitacionRutas = Observer<HashMap<String, RutaPrivada>> { listaRutas ->
         listaRutas?.let {
             adaptadorVistaInvitacionRutas?.notifyDataSetChanged()
+            resultado_busqueda_invitaciones_ruta.text = getString(R.string.resultado_busqueda_invitaciones_ruta, it.size)
         }
     }
 
@@ -51,7 +50,6 @@ class ListaRutasPrivadas : Fragment() {
         iniciarAdapterRutasPrivadas()
     }
 
-
     fun iniciarAdapterSolicitudesRuta(){
         invitacionRutasRV = list_invitacion_rutas as RecyclerView
         invitacionRutasRV.setHasFixedSize(true)
@@ -64,7 +62,7 @@ class ListaRutasPrivadas : Fragment() {
         }
         invitacionRutasRV.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL, false)
         adaptadorVistaInvitacionRutas = modeloVistaListaRutasPrivadas.listaInvitacionRutas.value?.let {
-            co.edu.udea.motoapp.ui.rutas_privadas.AdaptadorRuta(it, this@ListaRutasPrivadas.activity!!, 0)
+            AdaptadorRuta(it, this@ListaRutasPrivadas.activity!!, 0)
         }
         invitacionRutasRV.adapter = adaptadorVistaInvitacionRutas
     }

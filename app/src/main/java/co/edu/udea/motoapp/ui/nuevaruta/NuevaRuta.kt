@@ -166,6 +166,7 @@ class NuevaRuta : Fragment() {
                 "", breakpoints,
                 0.0F,
                 0,
+                "Creada",
                 moteroActual.uid,
                 hashMapOf()
             )

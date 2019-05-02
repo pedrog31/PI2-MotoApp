@@ -16,6 +16,7 @@ class RutaPrivada (
     override val paradas: @RawValue MutableList<ParadaRuta>,
     override val calificacion: Float,
     override val numeroCalificaciones: Int,
+    var estado: String,
     val propietario: String,
     val integrantes: @RawValue HashMap<String, HashMap<String,Any>>):Parcelable, Ruta(
          descripcion = descripcion,
@@ -38,6 +39,7 @@ class RutaPrivada (
         ruta.paradas,
         ruta.calificacion,
         ruta.numeroCalificaciones,
+        "Creada",
         propietario,
         hashMapOf()
     )

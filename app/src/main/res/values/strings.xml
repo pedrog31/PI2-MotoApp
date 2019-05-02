@@ -17,6 +17,8 @@
     <string name="agregar_amigo">Agregar</string>
     <string name="resultado_busqueda_nuevo_amigo">Encontramos %1$d moteros con tu busqueda</string>
     <string name="resultado_busqueda_solicitudes">Tienes %1$d solicitudes de amistad</string>
+    <string name="resultado_busqueda_invitaciones_ruta">Tienes %1$d invitaciones de rutas</string>
+    <string name="resultado_busqueda_rutas_privadas">Tienes %1$d rutas por recorrer</string>
     <string name="tipo_solicitud">solicitud</string>
     <string name="tipo_aceptacion">aceptacion</string>
     <string name="revisar">Revisar</string>
@@ -37,7 +39,7 @@
     <string name="dificultad_ruta">Dificultad: %1$s</string>
     <string name="calificacion_ruta">Calificacion: %1$s</string>
     <string name="agregar_ruta_publica">Agregar a mis rutas</string>
-    <string name="texto_estado_ruta_privada">Estado: implementacion futura</string>
+    <string name="texto_estado_ruta_privada">Estado: %1$s</string>
 
 
     <string name="action_settings">Settings</string>
@@ -48,7 +50,7 @@
         You have few space available, please make sure your have more than 5MB on disk to
         take pictures!
     </string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="error_message">Error occurred!</string>
     <string name="message_need_permission">Need Permissions</string>
     <string name="message_grant_permission">This app needs permission to use this feature. You can grant them in app
@@ -70,4 +72,5 @@
     <string name="boton_iniciar_ruta">Iniciar ruta</string>
     <string name="boton_eliminar_ruta">Eliminar ruta</string>
     <string name="estado_ruta_mensaje_espera">Debes esperar a que los integrantes de la ruta inicien el viaje</string>
+    <string name="boton_iniciar_ruta_invitado">Estoy aqui</string>
 </resources>

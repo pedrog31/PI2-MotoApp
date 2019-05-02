@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import co.edu.udea.motoapp.modelo.IntegranteRuta
 import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.modelo.RutaPrivada
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class ModeloVistaRutaIniciada : ViewModel() {
@@ -61,26 +62,42 @@ class ModeloVistaRutaIniciada : ViewModel() {
         }
     }
 
-    fun eliminarRuta(context: Context) {
+    fun eliminarRuta(contexto: FragmentActivity) {
         keyRutaActual?.let {
             repositorioRutaPrivada.child("rutasPrivadas/$it").removeValue()
                 .addOnSuccessListener {
-                    mostrarMensaje(context, "Ruta eliminada correctamente")
+                    mostrarMensaje(contexto, "Ruta eliminada correctamente")
+                    contexto.finish()
                 }
                 .addOnFailureListener {
-                    mostrarMensaje(context, "Error eliminando ruta")
+                    mostrarMensaje(contexto, "Error eliminando ruta")
                 }
         }
     }
 
-    fun buscarIntegrantesRuta() {
-        listaIntegrantesRuta.value = linkedMapOf()
-        listaMoterosIntegrantesRuta.value = linkedMapOf()
-        keyRutaActual?.let {
-            repositorioRutaPrivada
-                .child("rutasPrivadas/$it/integrantes")
-                .addChildEventListener(escuchadorIntegrantesRutas)
-        }
+    fun iniciarRuta(contexto: FragmentActivity) {
+        repositorioRutaPrivada
+            .child("rutasPrivadas/$keyRutaActual/estado").setValue("Iniciada")
+            .addOnSuccessListener {
+                mostrarMensaje(contexto, "Ruta iniciada correctamente")
+            }
+            .addOnFailureListener {
+                mostrarMensaje(contexto, "Error iniciando ruta")
+            }
+
+    }
+
+    fun eliminarRutaInvitada(contexto: FragmentActivity) {
+        val moteroId = FirebaseAuth.getInstance().uid
+        repositorioRutaPrivada
+            .child("moteros/$moteroId/invitacionRuta/$keyRutaActual").removeValue()
+            .addOnSuccessListener {
+                mostrarMensaje(contexto, "Ruta eliminada correctamente")
+                contexto.finish()
+            }
+            .addOnFailureListener {
+                mostrarMensaje(contexto, "Error eliminando ruta")
+            }
     }
 
     fun eliminarIntegranteRuta(contexto: FragmentActivity, integranteRutaKey: String) {
@@ -97,11 +114,7 @@ class ModeloVistaRutaIniciada : ViewModel() {
             }
     }
 
-    private fun mostrarMensaje(context: Context, mensaje: String) {
-        Toast.makeText(context, mensaje, Toast.LENGTH_LONG).show()
-    }
-
-    fun iniciarRuta(contexto: Context) {
-
+    private fun mostrarMensaje(contexto: Context, mensaje: String) {
+        Toast.makeText(contexto, mensaje, Toast.LENGTH_LONG).show()
     }
 }
