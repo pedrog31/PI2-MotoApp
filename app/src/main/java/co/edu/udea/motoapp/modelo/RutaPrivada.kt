@@ -18,7 +18,7 @@ class RutaPrivada (
     override val numeroCalificaciones: Int,
     var estado: String,
     val propietario: String,
-    val integrantes: @RawValue HashMap<String, HashMap<String,Any>>):Parcelable, Ruta(
+    val integrantes: @RawValue HashMap<String, IntegranteRuta>):Parcelable, Ruta(
          descripcion = descripcion,
         distancia = distancia,
         experiencia = experiencia,
@@ -28,6 +28,10 @@ class RutaPrivada (
         paradas = paradas,
         calificacion = calificacion,
         numeroCalificaciones = numeroCalificaciones) {
+
+    init {
+        integrantes[propietario] = IntegranteRuta()
+    }
 
     constructor(ruta: Ruta, propietario: String) :this(
         ruta.descripcion,
@@ -42,11 +46,25 @@ class RutaPrivada (
         "Creada",
         propietario,
         hashMapOf()
-    )
+    ) {
+        integrantes[propietario] = IntegranteRuta()
+    }
 
     constructor() :this(Ruta(), "")
 
     fun esPropietario() : Boolean {
         return propietario == FirebaseAuth.getInstance().uid
+    }
+
+    fun estadoCreada() : Boolean {
+        return estado == "Creada"
+    }
+
+    fun estadoIniciada() : Boolean {
+        return estado == "Iniciada"
+    }
+
+    fun estadoFinalizada() : Boolean {
+        return estado == "Finalizada"
     }
 }

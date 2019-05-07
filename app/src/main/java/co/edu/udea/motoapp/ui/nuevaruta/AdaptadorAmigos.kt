@@ -37,7 +37,7 @@ class AdaptadorAmigos(private val mapAmigosMoteros: HashMap<String, Motero>,
         }
         holder.vistaTarjetaAmigoCheckbox.checkBox_amigo.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
-                val readWriteMap = hashMapOf("inicioRuta" to false, "latitud" to 0, "longitud" to 0)
+                val readWriteMap = hashMapOf("conectado" to false, "latitud" to 0, "longitud" to 0)
                 amigosList.put(keysAmigosMoteros.elementAt(posicion),readWriteMap)
             }else{
                 amigosList.remove(keysAmigosMoteros.elementAt(posicion))

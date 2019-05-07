@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.fragmento_lista_rutas_privadas.*
 class ListaRutasPrivadas : Fragment() {
 
     lateinit var invitacionRutasRV : RecyclerView
-    lateinit var rutasPrivadasRV : RecyclerView
 
     companion object {
         fun nuevaInstancia() = ListaRutasPrivadas()
@@ -68,9 +67,7 @@ class ListaRutasPrivadas : Fragment() {
     }
 
     fun iniciarAdapterRutasPrivadas(){
-        rutasPrivadasRV = list as RecyclerView
-        rutasPrivadasRV.setHasFixedSize(true)
-
+        lista_rutas_privadas.setHasFixedSize(true)
         activity?.let {
             modeloVistaListaRutasPrivadas = androidx.lifecycle.ViewModelProviders.of(it).get(co.edu.udea.motoapp.ui.rutas_privadas.ModeloVistaListaRutasPrivadas::class.java)
             if (modeloVistaListaRutasPrivadas.listaRuta.value == null) {
@@ -78,11 +75,11 @@ class ListaRutasPrivadas : Fragment() {
             }
             modeloVistaListaRutasPrivadas.listaRuta.observe(it, this@ListaRutasPrivadas.observadorListaRutasPrivadas)
         }
-        rutasPrivadasRV.layoutManager = LinearLayoutManager(this.context)
+        lista_rutas_privadas.layoutManager = LinearLayoutManager(this.context)
         adaptadorVistaAmigos = modeloVistaListaRutasPrivadas.listaRuta.value?.let {
             co.edu.udea.motoapp.ui.rutas_privadas.AdaptadorRuta(it, this@ListaRutasPrivadas.activity!!, 1)
         }
-        rutasPrivadasRV.adapter = adaptadorVistaAmigos
+        lista_rutas_privadas.adapter = adaptadorVistaAmigos
     }
 
 }

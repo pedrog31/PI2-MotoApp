@@ -53,6 +53,7 @@ class RutaIniciada : AppCompatActivity() {
         modeloVistaRutaIniciada = ViewModelProviders.of(this).get(ModeloVistaRutaIniciada::class.java)
         modeloVistaRutaIniciada.rutaActual = intent?.extras?.getParcelable("ruta") ?: return
         modeloVistaRutaIniciada.keyRutaActual = intent?.extras?.getString("key_ruta") ?: return
+        modeloVistaRutaIniciada.iniciarEscuchaEstadoRuta()
         setContentView(R.layout.actividad_ruta_iniciada)
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, RutaIniciada.newInstance())

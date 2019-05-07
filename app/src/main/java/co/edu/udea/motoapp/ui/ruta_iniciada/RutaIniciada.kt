@@ -1,18 +1,13 @@
 package co.edu.udea.motoapp.ui.ruta_iniciada
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.udea.motoapp.R
-import co.edu.udea.motoapp.modelo.IntegranteRuta
-import co.edu.udea.motoapp.modelo.Motero
 import co.edu.udea.motoapp.util.TransformacionImagen
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,7 +17,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragmento_ruta_iniciada.*
-import kotlinx.android.synthetic.main.tarjeta_estado_integrantes_ruta.*
 
 
 class RutaIniciada : Fragment(), OnMapReadyCallback {
@@ -55,26 +49,46 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
                         .fit()
                         .into(imagen_ruta)
             }
+            modeloVistaRutaIniciada.estadoRuta.observeForever {
+                manejarAccionesRuta()
+            }
         }
     }
 
     private fun manejarAccionesRuta() {
         if (this.modeloVistaRutaIniciada.rutaActual!!.esPropietario()) {
-            boton_iniciar_ruta.visibility = View.VISIBLE
-            boton_eliminar_ruta.visibility = View.VISIBLE
-            boton_iniciar_ruta.setOnClickListener {
-                iniciarRuta()
+            if (modeloVistaRutaIniciada.rutaActual!!.estadoCreada()) {
+                boton_iniciar_ruta.visibility = View.VISIBLE
+                boton_eliminar_ruta.visibility = View.VISIBLE
+                boton_iniciar_ruta.setOnClickListener {
+                    boton_iniciar_ruta.visibility = View.GONE
+                    boton_eliminar_ruta.visibility = View.GONE
+                    iniciarRuta()
+                }
+                boton_eliminar_ruta.setOnClickListener {
+                    this@RutaIniciada.activity?.let { it1 -> modeloVistaRutaIniciada.eliminarRuta(it1) }
+                }
+            } else if (this.modeloVistaRutaIniciada.rutaActual!!.estadoIniciada()) {
+                boton_finalizar_ruta.visibility = View.VISIBLE
+                boton_finalizar_ruta.setOnClickListener {
+                    boton_finalizar_ruta.visibility = View.GONE
+                    finalizarRuta()
+                }
             }
-            boton_eliminar_ruta.setOnClickListener {
-                this@RutaIniciada.activity?.let { it1 -> modeloVistaRutaIniciada.eliminarRuta(it1) }
-            }
-        } else {
-            boton_eliminar_ruta_invitado.visibility = View.VISIBLE
+        } else  {
+            if (modeloVistaRutaIniciada.rutaActual!!.estadoCreada())
+                boton_eliminar_ruta_invitado.visibility = View.VISIBLE
+            if (modeloVistaRutaIniciada.rutaActual!!.estadoIniciada())
+                boton_iniciar_ruta_invitado.visibility = View.VISIBLE
             boton_iniciar_ruta.setOnClickListener {
-                iniciarRutaInvitado()
+                iniciarRutaIntegrante()
+                boton_eliminar_ruta_invitado.visibility = View.GONE
+                boton_iniciar_ruta_invitado.visibility = View.GONE
             }
             boton_eliminar_ruta_invitado.setOnClickListener {
                 this@RutaIniciada.activity?.let { it1 -> modeloVistaRutaIniciada.eliminarRutaInvitada(it1) }
+                boton_eliminar_ruta_invitado.visibility = View.GONE
+                boton_iniciar_ruta_invitado.visibility = View.GONE
             }
         }
         boton_mapa_ruta.setOnClickListener {
@@ -85,13 +99,23 @@ class RutaIniciada : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun iniciarRuta() {
-        this.activity?.let { this.modeloVistaRutaIniciada.iniciarRuta(it) }
-
+    private fun finalizarRuta() {
+        this.activity?.let {
+            this.modeloVistaRutaIniciada.finalizarRuta(it)
+        }
     }
 
-    private fun iniciarRutaInvitado() {
+    private fun iniciarRuta() {
+        this.activity?.let {
+            this.modeloVistaRutaIniciada.iniciarRuta(it)
+            iniciarRutaIntegrante()
+        }
+    }
 
+    private fun iniciarRutaIntegrante() {
+        this.activity?.let {
+            this.modeloVistaRutaIniciada.iniciarRutaIntegrante(it)
+        }
     }
 
 

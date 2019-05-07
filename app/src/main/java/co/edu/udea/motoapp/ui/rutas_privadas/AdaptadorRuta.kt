@@ -77,7 +77,7 @@ class AdaptadorRuta (
                             rutaViewHolder.vistaTarjetaRuta.boton_aceptar_ruta.visibility=View.INVISIBLE
                             rutaViewHolder.vistaTarjetaRuta.boton_rechazar_ruta.isClickable=false
                             rutaViewHolder.vistaTarjetaRuta.boton_rechazar_ruta.visibility=View.INVISIBLE
-                            val onje = hashMapOf("inicioRuta" to false, "latitud" to 0, "longitud" to 0)
+                            val onje = hashMapOf("conectado" to false, "latitud" to 0, "longitud" to 0)
                             repositorioInvitacionRutas.child("rutasPrivadas").child(keyRutaPrivada).child("integrantes").child(moteroId!!).setValue(onje)
                             notifyDataSetChanged()
                         }

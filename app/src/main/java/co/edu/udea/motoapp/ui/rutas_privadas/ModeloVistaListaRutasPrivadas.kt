@@ -1,6 +1,5 @@
 package co.edu.udea.motoapp.ui.rutas_privadas
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.edu.udea.motoapp.modelo.RutaPrivada
@@ -29,14 +28,13 @@ class ModeloVistaListaRutasPrivadas : ViewModel() {
         }
 
         override fun onChildAdded(identificador: DataSnapshot, nombreHijoAnterior: String?) {
-            Log.d("Ruta1",identificador.key)
             identificador.key?.let {
                 repositorioRutas.child("rutasPrivadas/$it").addListenerForSingleValueEvent(escuchadorRuta)
             }
         }
 
         override fun onChildRemoved(identificador: DataSnapshot) {
-            listaRuta.value?.remove(identificador.value.toString())
+            listaRuta.value?.remove(identificador.key)
             listaRuta.value = listaRuta.value
 
         }
@@ -71,7 +69,6 @@ class ModeloVistaListaRutasPrivadas : ViewModel() {
         }
 
         override fun onDataChange(datoRuta: DataSnapshot) {
-            Log.d("Ruta2", datoRuta.value.toString())
             datoRuta.getValue(RutaPrivada::class.java)?.let {
                 listaRuta.value?.put(datoRuta.key.toString(), it)
                 listaRuta.value = listaRuta.value
@@ -84,7 +81,6 @@ class ModeloVistaListaRutasPrivadas : ViewModel() {
         }
 
         override fun onDataChange(datoRuta: DataSnapshot) {
-            Log.d("Ruta2", datoRuta.value.toString())
             datoRuta.getValue(RutaPrivada::class.java)?.let {
                 listaInvitacionRutas.value?.put(datoRuta.key.toString(), it)
                 listaInvitacionRutas.value = listaInvitacionRutas.value

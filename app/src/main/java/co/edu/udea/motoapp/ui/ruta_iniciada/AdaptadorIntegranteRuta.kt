@@ -43,7 +43,7 @@ class AdaptadorIntegranteRuta(private val contexto: FragmentActivity):
         }
         if(modeloVistaRutaIniciada.rutaActual!!.esPropietario())
             integranteRutaViewHolder.vistaTarjetaIntegranteRuta.boton_eliminar_integrante_ruta.visibility = View.VISIBLE
-        if(integranteRuta.inicioRuta) {
+        if(integranteRuta.conectado) {
             integranteRutaViewHolder.vistaTarjetaIntegranteRuta.boton_eliminar_integrante_ruta.visibility = View.GONE
             integranteRutaViewHolder.vistaTarjetaIntegranteRuta.imagen_integrante_iniciado.visibility = View.VISIBLE
         }

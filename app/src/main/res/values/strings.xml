@@ -73,4 +73,5 @@
     <string name="boton_eliminar_ruta">Eliminar ruta</string>
     <string name="estado_ruta_mensaje_espera">Debes esperar a que los integrantes de la ruta inicien el viaje</string>
     <string name="boton_iniciar_ruta_invitado">Estoy aqui</string>
+    <string name="boton_finalizar_ruta">Finalizar ruta</string>
 </resources>

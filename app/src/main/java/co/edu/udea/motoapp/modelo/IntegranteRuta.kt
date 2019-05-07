@@ -1,9 +1,21 @@
 package co.edu.udea.motoapp.modelo
 
-class IntegranteRuta (
-    val inicioRuta: Boolean,
-    val latitud: Double,
-    val longitud: Double) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
-    constructor() : this(false, 0.0,0.0)
+@Parcelize
+class IntegranteRuta (
+    var conectado: Boolean,
+    val ubicaciones: @RawValue MutableList<Ubicacion>) : Parcelable {
+
+    constructor() : this(false, mutableListOf())
+
+    @Parcelize
+    class Ubicacion (
+        val latitud: Double,
+        val longitud: Double) : Parcelable {
+
+        constructor(): this(0.0, 0.0)
+    }
 }

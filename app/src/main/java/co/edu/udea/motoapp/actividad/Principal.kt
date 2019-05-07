@@ -73,7 +73,6 @@ class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
             }
             0 -> {
                 principalBotonFlotante.setImageDrawable(this@Principal.getDrawable(R.drawable.ic_anadir_amigo))
-                principalBotonFlotante.show()
                 principalBotonFlotante.setOnClickListener {
                     startActivity(Intent(this@Principal, NuevaRuta::class.java))
                 }
@@ -86,9 +85,7 @@ class Principal : AppCompatActivity(), ViewPager.OnPageChangeListener {
                 }
             }
 
-            else -> {
-                principalBotonFlotante.setOnClickListener {  }
-            }
+            else -> return
         }
     }
 
