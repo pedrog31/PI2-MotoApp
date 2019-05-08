@@ -12,11 +12,13 @@ import co.edu.udea.motoapp.modelo.RutaPrivada
 import co.edu.udea.motoapp.servicios.UbicacionActualRuta
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.util.AbstractMap
 
 class ModeloVistaRutaIniciada : ViewModel() {
 
     val listaIntegrantesRuta = MutableLiveData<LinkedHashMap<String, IntegranteRuta>>()
     val listaMoterosIntegrantesRuta = MutableLiveData<LinkedHashMap<String, Motero>>()
+    val ubicacionIntegranteRuta = MutableLiveData<AbstractMap.SimpleEntry<String, IntegranteRuta.Ubicacion>>()
     val estadoRuta = MutableLiveData<String>()
     var keyRutaActual: String? = null
     var rutaActual: RutaPrivada? = null
@@ -30,19 +32,38 @@ class ModeloVistaRutaIniciada : ViewModel() {
         override fun onDataChange(datoEstado: DataSnapshot) {
             rutaActual?.estado = datoEstado.value.toString()
             estadoRuta.value = rutaActual?.estado
-            when (rutaActual?.estado) {
-                "Iniciada" -> {
+            if (rutaActual?.estadoIniciada()!!)
+                repositorioRutaPrivada
+                    .child("rutasPrivadas/$keyRutaActual/integrantes")
+                    .addChildEventListener(escuchadorUbicacionIntegrantes)
+        }
+    }
 
-                }
+    val escuchadorUbicacionIntegrantes = object : ChildEventListener {
+        override fun onCancelled(p0: DatabaseError) {
 
-                "Creada" -> {
+        }
 
-                }
+        override fun onChildMoved(p0: DataSnapshot, p1: String?) {
 
-                "Finalizada" -> {
+        }
 
-                }
-            }
+        override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+            val integranteRuta = p0.getValue(IntegranteRuta::class.java)?.ubicaciones
+            if (integranteRuta != null && integranteRuta.isNotEmpty())
+                ubicacionIntegranteRuta.value =
+                    AbstractMap.SimpleEntry(p0.key.toString(), integranteRuta[integranteRuta.size - 1])
+        }
+
+        override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+            val integranteRuta = p0.getValue(IntegranteRuta::class.java)?.ubicaciones
+            if (integranteRuta != null && integranteRuta.isNotEmpty())
+                ubicacionIntegranteRuta.value =
+                    AbstractMap.SimpleEntry(p0.key.toString(), integranteRuta[integranteRuta.size - 1])
+        }
+
+        override fun onChildRemoved(p0: DataSnapshot) {
+
         }
     }
 
@@ -154,4 +175,6 @@ class ModeloVistaRutaIniciada : ViewModel() {
             .addValueEventListener(escuchadorEstadoRuta)
 
     }
+
+
 }
